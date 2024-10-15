@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Layout</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa; /* 부트스트랩 기본 배경 색 */
+        }
+        .navbar-custom {
+            background-color: #343a40; /* 어두운 색상 */
+        }
+        .navbar-brand, .nav-link, .btn-outline-primary {
+            color: #ffffff !important; /* 흰색 텍스트 */
+        }
+        .nav-link.active {
+            font-weight: bold;
+        }
+        .category-list {
+            background-color: #e9ecef; /* 밝은 그레이 톤 */
+            height: 100%;
+        }
+        .category-list .list-group-item {
+            background-color: transparent;
+            border: none;
+            font-size: 1.1rem;
+        }
+        .content-wrapper {
+            padding-left: 30px;
+        }
+        .content-list {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .content-list .list-group-item {
+            border: none;
+            background-color: #6f42c1;
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+        .content-list .list-group-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .content-list .list-group-item span {
+            font-weight: lighter;
+        }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-5" href="{% url 'gangnam' %}">메인</a> <!-- 홈으로 리다이렉트 -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-5">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'gangnam' %}">커뮤니티</a> <!-- 커뮤니티로 리다이렉트 -->
+                    </li>
+                </ul>
+            </div>
+            <a class="btn btn-outline-primary" href="{% url 'gangnam' %}">로그인</a> <!-- 로그인 페이지로 이동 -->
+        </div>
+    </nav>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- 왼쪽 카테고리 리스트 -->
+            <div class="col-md-2 category-list">
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'gangnam' %}">강남구</a></li> <!-- 강남구 페이지로 리다이렉트 -->
+                    <li class="list-group-item"><a href="{% url 'seocho' %}">서초구</a></li> <!-- 서초구 페이지로 리다이렉트 -->
+                    <li class="list-group-item"><a href="{% url 'songpa' %}">송파구</a></li>
+                </ul>
+            </div>
+
+            <!-- 오른쪽 글 목록 -->
+            <div class="col-md-10 content-wrapper">
+                <div class="content-header">
+                    <h3>서초구</h3>
+                    <button class="btn btn-primary">글 작성</button>
+                </div>
+                <div class="content-list p-3">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#">글1</a>
+                            <span>코멘트 개수</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#">글2</a>
+                            <span>코멘트 개수</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#">글3</a>
+                            <span>코멘트 개수</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#">글4</a>
+                            <span>코멘트 개수</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <a href="#">글5</a>
+                            <span>코멘트 개수</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
