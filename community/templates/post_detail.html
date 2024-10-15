@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">집구해조</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">커뮤니티</a>
+                    </li>
+                </ul>
+
+                <!-- 로그인 상태에 따라 다른 UI 보여주기 -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- 로그인 전 상태 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">회원가입</a>
+                    </li>
+
+                    <!-- 로그인 후 상태 -->
+                    <!-- 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            사용자 이름
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">내 프로필</a></li>
+                            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                        </ul>
+                    </li>
+                    -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+  <!-- 상세페이지 -->
+    <div class="container mt-4">
+        <h2>첫 번째 게시물</h2>
+        <div class="mb-3">
+            <span><strong>작성자:</strong> 관리자</span> | 
+            <span><strong>작성일:</strong> 2024-10-15</span> | 
+            <span><strong>조회수:</strong> 100</span>
+        </div>
+        <div class="border p-3 mb-3">
+            <p>여기에 게시물 내용이 들어갑니다. 이 내용은 예시입니다.</p>
+        </div>
+        <a href="board.html" class="btn btn-secondary">목록으로</a>
+    </div>
+    <!-- 댓글 섹션 -->
+    <div class="container mt-5">
+        <h4>댓글</h4>
+
+        <!-- 댓글 입력 폼 -->
+        <div class="mb-4">
+            <form>
+                <div class="mb-3">
+                    <label for="commentInput" class="form-label">댓글 작성</label>
+                    <textarea class="form-control" id="commentInput" rows="3" placeholder="댓글을 입력하세요"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">댓글 달기</button>
+            </form>
+        </div>
+
+        <!-- 댓글 목록 -->
+        <div class="border p-3 mb-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>사용자1</strong> <span class="text-muted">2024-10-14</span>
+                </div>
+                <div>
+                    <a href="#" class="text-muted">수정</a> | <a href="#" class="text-muted">삭제</a>
+                </div>
+            </div>
+            <p class="mt-2">이 게시물 정말 유익하네요. 감사합니다!</p>
+        </div>
+
+        <div class="border p-3 mb-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <strong>사용자2</strong> <span class="text-muted">2024-10-13</span>
+                </div>
+                <div>
+                    <a href="#" class="text-muted">수정</a> | <a href="#" class="text-muted">삭제</a>
+                </div>
+            </div>
+            <p class="mt-2">좋은 정보 감사합니다!</p>
+        </div>
+
+        <!-- 더 많은 댓글 추가 가능 -->
+    </div>
+</body>
+</html>
