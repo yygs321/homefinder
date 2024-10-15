@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .views import PostDetailView
 
 urlpatterns = [
     path('community/', views.index, name='index'),
@@ -9,6 +10,10 @@ urlpatterns = [
     path('community/board/create/', views.create_board_view, name='board_create'),  # 게시글 작성
     path('sign-up/', views.sign_up_view , name='sign_up'),
     path('sign-in/', views.sign_in_view, name='sign_in'),
+    path('gangnam/', views.gangnam_view, name='gangnam'),
+    path('seocho/', views.seocho_view, name='seocho'),
+    path('songpa/', views.songpa_view, name='songpa'),
+    path('post_<int:board_id>/', PostDetailView.as_view(), name='post-detail'),
 ]
 
 
@@ -23,3 +28,6 @@ urlpatterns = [
 #     path('wclouddata/', WordCloudData.as_view()),
 #     path('heatdata/', HeatMapData.as_view()),
 # ]
+from django.urls import path
+from . import views
+

@@ -75,3 +75,24 @@ def board_list_view(request):
     boards = BoardModel.objects.all()  # 모든 게시글 조회
     context = {'boards': boards}
     return render(request, 'community/board_list.html', context)  # board_list.html 템플릿 렌더링
+from django.shortcuts import render
+from django.views.generic import DetailView
+from .models import Post
+
+def gangnam_view(request):
+    return render(request, 'gangnam.html')
+
+def seocho_view(request):
+    return render(request, 'seocho.html')
+
+def songpa_view(request):
+    return render(request, 'songpa.html')
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post_detail.html'
+    context_object_name = 'post'
+
+    def get_object(self, queryset=None):
+        board_id = self.kwargs.get('board_id')
+        return self.model.objects.get(board_id=board_id)  # post_id를 사용하여 객체 가져오기

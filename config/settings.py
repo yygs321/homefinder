@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'bootstrap4',
+    'django_bootstrap5',
     'homefind',
     'community',
 ]
