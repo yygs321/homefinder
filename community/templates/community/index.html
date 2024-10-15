@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- 정적 파일 경로 -->
+</head>
+<body>
+    <div class="container">
+        <h1>최근 게시글</h1>
+        <ul>
+            {% for board in boards %}
+                <li>
+                    <h2>{{ board.title }}</h2>
+                    <p>작성일: {{ board.created_date }}</p>
+                    <p>{{ board.content|truncatewords:30 }}</p>
+                    <a href="{% url 'board_index' board.id %}">자세히 보기</a>
+                </li>
+            {% empty %}
+                <li>게시글이 없습니다.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'board_create' %}">게시글 작성하기</a>
+    </div>
+</body>
+</html>
