@@ -6,7 +6,13 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render, get_object_or_404
 
+def index(request):
+    return render(request, "index.html")
+
+def map(request):
+    return render(request, "map.html")
 
 class MapData(generics.GenericAPIView):
     def get(self, request):

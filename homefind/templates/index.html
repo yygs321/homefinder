@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Finder</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Home Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Board</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Map</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Real Estate Dashboard</h1>
+
+        <!-- Sidebar with districts and toggle buttons -->
+        <div class="row">
+            <div class="col-md-2"> <!-- Sidebar width reduced from 3 to 2 -->
+                <!-- Seoul district list -->
+                <h5>지역</h5>
+                <ul class="list-group mb-4" id="district-list">
+                    <li class="list-group-item" data-district="Gangnam">강남</li>
+                    <li class="list-group-item" data-district="Gangsu">강서</li>
+                    <li class="list-group-item" data-district="Gwangjin">광진</li>
+                    <li class="list-group-item" data-district="Nowon">노원</li>
+                    <li class="list-group-item" data-district="Dongdaemun">동대문</li>
+                    <li class="list-group-item" data-district="Seongbuk">성북</li>
+                    <li class="list-group-item" data-district="Seongdong">성동</li>
+                    <li class="list-group-item" data-district="Songpa">송파</li>
+                    <li class="list-group-item" data-district="Yongsan">용산</li>
+                    <li class="list-group-item" data-district="Jongno">종로</li>
+                </ul>
+
+                <!-- Toggle buttons Map -->
+                <div class="btn-group-vertical w-100">
+                    <button id="toggle-map" class="btn btn-secondary btn-sm mt-2">Show Map</button>
+                </div>
+            </div>
+
+            <!-- Board and Map Container -->
+            <div class="col-md-10"> <!-- Chart area width increased from 9 to 10 -->
+                <div id="board" style="display: none;">
+                    <!-- Row for multiple graphs with options -->
+                    <div class="row">
+                        <!-- First Graph with selection option -->
+                        <div class="col-md-6">
+                            <label for="chart1-select">Select Data Type:</label>
+                            <select id="chart1-select" class="form-control mb-3" onchange="updateChart1()">
+                                <option value="매매">매매</option>
+                                <option value="전세">전세</option>
+                                <option value="월세">월세</option>
+                            </select>
+                            <canvas id="chart1"></canvas>
+                        </div>
+
+                        <!-- Second Graph -->
+                        <div class="col-md-6">
+                            <label for="chart2-select">Select Data Type:</label>
+                            <select id="chart2-select" class="form-control mb-3" onchange="updateChart2()">
+                                <option value="빌라">빌라</option>
+                                <option value="오피스텔">오피스텔</option>
+                                <option value="원룸">원룸</option>
+                            </select>
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Third Graph -->
+                        <div class="col-md-6">
+                            <canvas id="chart3"></canvas>
+                        </div>
+                        <!-- Fourth Graph -->
+                        <div class="col-md-6">
+                            <canvas id="chart4"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <!-- Fifth Graph -->
+                        <div class="col-md-6">
+                            <canvas id="chart5"></canvas>
+                        </div>
+                        <!-- Sixth Graph -->
+                        <div class="col-md-6">
+                            <canvas id="chart6"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('board').style.display = 'block';
+
+        // Data sets for sales and rent
+        const districtData1 = {
+            Jongno: { sales: [100, 150, 200], rent: [70, 120, 170], monthly: [120, 110, 170] },
+            Gangsu: { sales: [80, 130, 180], rent: [60, 110, 160], monthly: [120, 110, 170] },
+            Yongsan: { sales: [90, 140, 190], rent: [65, 115, 165], monthly: [120, 110, 170] },
+            Seongdong: { sales: [120, 170, 220], rent: [85, 135, 185], monthly: [120, 110, 170] },
+            Gwangjin: { sales: [130, 180, 230], rent: [95, 145, 195], monthly: [120, 110, 170] },
+            Dongdaemun: { sales: [110, 160, 210], rent: [75, 125, 175], monthly: [120, 110, 170] },
+            Nowon: { sales: [105, 155, 205], rent: [72, 122, 172], monthly: [120, 110, 170] },
+            Seongbuk: { sales: [115, 165, 215], rent: [82, 132, 182], monthly: [120, 110, 170] },
+            Gangnam: { sales: [200, 250, 300], rent: [140, 190, 240], monthly: [120, 110, 170] },
+            Songpa: { sales: [190, 240, 290], rent: [130, 180, 230], monthly: [120, 110, 170] }
+        };
+
+        const districtData2 = {
+            Jongno: { villa: [100, 150, 200], officetel: [70, 120, 170], oneroom: [120, 110, 170] },
+            Gangsu: { villa: [80, 130, 180], officetel: [60, 110, 160], oneroom: [120, 110, 170] },
+            Yongsan: { villa: [90, 140, 190], officetel: [65, 115, 165], oneroom: [120, 110, 170] },
+            Seongdong: { villa: [120, 170, 220], officetel: [85, 135, 185], oneroom: [120, 110, 170] },
+            Gwangjin: { villa: [130, 180, 230], officetel: [95, 145, 195], oneroom: [120, 110, 170] },
+            Dongdaemun: { villa: [110, 160, 210], officetel: [75, 125, 175], oneroom: [120, 110, 170] },
+            Nowon: { villa: [105, 155, 205], officetel: [72, 122, 172], oneroom: [120, 110, 170] },
+            Seongbuk: { villa: [115, 165, 215], officetel: [82, 132, 182], oneroom: [120, 110, 170] },
+            Gangnam: { villa: [200, 250, 300], officetel: [140, 190, 240], oneroom: [120, 110, 170] },
+            Songpa: { villa: [190, 240, 290], officetel: [130, 180, 230], oneroom: [120, 110, 170] }
+        };
+
+        const donutDistrictData1 = {
+            Jongno: [50, 30, 20],  // Example data for each district (월세, 전세, 매매)
+            Gangsu: [40, 35, 25],
+            Yongsan: [55, 25, 20],
+            Seongdong: [60, 20, 20],
+            Gwangjin: [45, 30, 25],
+            Dongdaemun: [50, 35, 15],
+            Nowon: [55, 30, 15],
+            Seongbuk: [40, 35, 25],
+            Gangnam: [70, 20, 10],
+            Songpa: [65, 25, 10]
+        };
+
+        const donutDistrictData2 = {
+            Jongno: [50, 30, 20],  // Example data for each district (월세, 전세, 매매)
+            Gangsu: [40, 35, 25],
+            Yongsan: [55, 25, 20],
+            Seongdong: [60, 20, 20],
+            Gwangjin: [45, 30, 25],
+            Dongdaemun: [50, 35, 15],
+            Nowon: [55, 30, 15],
+            Seongbuk: [40, 35, 25],
+            Gangnam: [70, 20, 10],
+            Songpa: [65, 25, 10]
+        };
+
+        const trendData1 = {
+            Jongno: [50, 100, 150, 200, 250],
+            Gangsu: [40, 90, 120, 180, 210],
+            Yongsan: [60, 110, 140, 190, 230],
+            Seongdong: [70, 120, 160, 200, 250],
+            Gwangjin: [55, 115, 135, 175, 210],
+            Dongdaemun: [65, 125, 150, 190, 230],
+            Nowon: [45, 95, 120, 170, 200],
+            Seongbuk: [60, 110, 140, 180, 220],
+            Gangnam: [80, 140, 180, 230, 280],
+            Songpa: [75, 130, 170, 220, 260]
+        };
+
+        const trendData2 = {
+            Jongno: [50, 100, 150, 200, 250],
+            Gangsu: [40, 90, 120, 180, 210],
+            Yongsan: [60, 110, 140, 190, 230],
+            Seongdong: [70, 120, 160, 200, 250],
+            Gwangjin: [55, 115, 135, 175, 210],
+            Dongdaemun: [65, 125, 150, 190, 230],
+            Nowon: [45, 95, 120, 170, 200],
+            Seongbuk: [60, 110, 140, 180, 220],
+            Gangnam: [80, 140, 180, 230, 280],
+            Songpa: [75, 130, 170, 220, 260]
+        };
+
+        // First chart initialization (Bar Chart)
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['빌라', '오피스텔', '원룸'],
+                datasets: [{
+                    label: 'Sales Data',
+                    data: districtData1['Gangnam'].sales,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Contract Amount for Transaction Type'
+                    }
+                }
+            }
+        });
+
+        // Second chart initialization (Bar Chart)
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['매매', '전세', '월세'],
+                datasets: [{
+                    label: 'Resident Data',
+                    data: districtData2['Gangnam'].villa,
+                    backgroundColor: 'rgba(100, 150,150, 0.2)',
+                    borderColor: 'rgba(100, 150, 150, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Contract Amount for Residental Type'
+                    }
+                }
+            }
+        });
+
+        // Third chart initialization (Donut Chart)
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'doughnut',
+            data: {
+                labels: ['월세', '전세', '매매'],
+                datasets: [{
+                    label: 'Donut Data',
+                    data: donutDistrictData1['Gangnam'],  // Initial data for Gangnam
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Ratio of Transaction Type'
+                    }
+                }
+            }
+        });
+
+        // Fourth chart initialization (Pie Chart)
+        var ctx4 = document.getElementById('chart4').getContext('2d');
+        var chart4 = new Chart(ctx4, {
+            type: 'pie',
+            data: {
+                labels: ['빌라', '오피스텔', '원룸'],
+                datasets: [{
+                    label: 'Pie Data',
+                    data: donutDistrictData2['Gangnam'],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 205, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 205, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Ratio of Residental Type'
+                    }
+                }
+            }
+        });
+
+        // Fifth chart initialization (Line Chart)
+        var ctx5 = document.getElementById('chart5').getContext('2d');
+        var chart5 = new Chart(ctx5, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Trend Data',
+                    data: trendData1['Gangnam'],
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Trends in Population Change'
+                    }
+                }
+            }
+        });
+
+        // Sixth chart initialization (Line Chart)
+        var ctx6 = document.getElementById('chart6').getContext('2d');
+        var chart6 = new Chart(ctx6, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Trend Data',
+                    data: trendData2['Gangnam'],
+                    backgroundColor: 'rgb(39,50,100,0.2)',
+                    borderColor: 'rgb(39,50,109)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Trends in Real Estate Transaction'
+                    }
+                }
+            }
+        });
+
+        // Event listener for district selection
+        document.querySelectorAll('.list-group-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.list-group-item.active')?.classList.remove('active');
+                this.classList.add('active');
+                updateChart1();  // First chart update
+                updateChart2();
+                updateDonutChart1();
+                updateDonutChart2();
+                updateTrendCharts()
+
+            });
+        });
+
+        // Update chart1 based on the selected value
+        function updateChart1() {
+            var selectedOption = document.getElementById('chart1-select').value;
+            var selectedDistrict = document.querySelector('.list-group-item.active').dataset.district;
+
+            if (selectedOption === '매매') {
+                chart1.data.datasets[0].data = districtData1[selectedDistrict].sales;
+                chart1.data.datasets[0].label = 'Sales Data';
+            } else if (selectedOption === '전세') {
+                chart1.data.datasets[0].data = districtData1[selectedDistrict].rent;  // 전세 데이터로 바꾸고 싶으면 rent 데이터를 사용합니다.
+                chart1.data.datasets[0].label = 'Rent Data';
+            } else if (selectedOption === '월세') {
+                chart1.data.datasets[0].data = districtData1[selectedDistrict].monthly;  // 월세 데이터를 사용하는 로직으로 업데이트 필요
+                chart1.data.datasets[0].label = 'Monthly Data';
+            }
+            chart1.update();
+        }
+
+        // Update chart1 based on the selected value
+        function updateChart2() {
+            var selectedOption = document.getElementById('chart2-select').value;
+            var selectedDistrict = document.querySelector('.list-group-item.active').dataset.district;
+
+            if (selectedOption === '빌라') {
+                chart2.data.datasets[0].data = districtData2[selectedDistrict].villa;
+                chart2.data.datasets[0].label = 'Villa Data';
+            } else if (selectedOption === '오피스텔') {
+                chart2.data.datasets[0].data = districtData2[selectedDistrict].officetel;
+                chart2.data.datasets[0].label = 'Officetel Data';
+            } else if (selectedOption === '원룸') {
+                chart2.data.datasets[0].data = districtData2[selectedDistrict].oneroom;
+                chart2.data.datasets[0].label = 'Oneroom Data';
+            }
+            chart2.update();
+        }
+
+        // Update donut chart based on selected district
+        function updateDonutChart1() {
+            var selectedDistrict = document.querySelector('.list-group-item.active').dataset.district;
+            chart3.data.datasets[0].data = donutDistrictData1[selectedDistrict];  // Update donut data based on the selected district
+            chart3.update();
+        }
+
+        // Update donut chart based on selected district
+        function updateDonutChart2() {
+            var selectedDistrict = document.querySelector('.list-group-item.active').dataset.district;
+            chart4.data.datasets[0].data = donutDistrictData2[selectedDistrict];  // Update donut data based on the selected district
+            chart4.update();
+        }
+
+        // 차트 5와 6 업데이트 함수
+        function updateTrendCharts() {
+            var selectedDistrict = document.querySelector('.list-group-item.active').dataset.district;
+
+            // 차트 5 업데이트
+            chart5.data.datasets[0].data = trendData1[selectedDistrict];
+            chart5.update();
+
+            // 차트 6 업데이트
+            chart6.data.datasets[0].data = trendData2[selectedDistrict];
+            chart6.update();
+        }
+
+        document.getElementById('toggle-map').addEventListener('click', function() {
+            window.location.href = 'map.html';  // map.html로 이동
+        });
+
+    </script>
+</body>
+</html>

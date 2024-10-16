@@ -1,4 +1,6 @@
 from django.urls import path, include
+
+from . import views
 from .views import *
 
 urlpatterns = [
@@ -8,4 +10,9 @@ urlpatterns = [
     path('scountbycat/', ForSaleCountbyCategory.as_view()),
     path('wclouddata/', WordCloudData.as_view()),
     path('heatdata/', HeatMapData.as_view()),
+
+    path('index',views.index),
+    path('map',views.map),
+
+
 ]
