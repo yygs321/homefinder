@@ -2,10 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from datetime import datetime, timedelta
 from frequency_counter import count_frequency
-from db_connector import save_to_db, save_to_redis, check_cache_and_update_if_needed
-import time
+from db_connector import *
 
 # Chrome 드라이버 경로 설정
 chrome_service = Service(r'C:\Program Files\chromeDriver\chromedriver-win64\chromedriver.exe')
@@ -54,7 +52,6 @@ def crawl_news(city_no, dvsn_no):
 
             # 빈도수 계산하고 결과를 리스트에 추가
             count_frequency(title, frequency_data, today)
-            #save_to_db(frequency_data)
 
         page += 1
 
@@ -99,5 +96,6 @@ if check_cache_and_update_if_needed(): #캐시가 없거나 기간이 지난 경
     # 크롤링이 완료된 후 DB와 Redis에 저장
     save_to_db(frequency_data)
     save_to_redis(frequency_data)
-else:
-    print("캐시 데이터에서 읽어옵니다.")
+
+frequency_result= get_cached_data()
+print(frequency_result)
