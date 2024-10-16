@@ -287,4 +287,4 @@ cython_debug/
 # LSP config files
 pyrightconfig.json
 
-# End of https://www.toptal.com/developers/gitignore/api/python,pycharm
+# End of https://www.toptal.com/developers/gitignore/api/python,pycharm"__pycache__/" 
