@@ -64,7 +64,9 @@ def check_cache_and_update_if_needed():
 
     # 첫 번째 데이터의 날짜 확인
     cached_data = redis_client.hgetall(keys[0])
-    cached_date = datetime.strptime(cached_data['date'], '%Y-%m-%d')
+    if b'date' in cached_data:
+        # 바이트 문자열을 UTF-8로 디코딩
+        cached_date = datetime.strptime(cached_data[b'date'].decode('utf-8'), '%Y-%m-%d')
 
     if datetime.now() - cached_date > timedelta(days=7):
         print("캐시가 만료되어 크롤링 진행")
