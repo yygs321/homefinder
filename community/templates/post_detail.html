@@ -6,69 +6,121 @@
     <title>커뮤니티</title>
     <!-- Bootstrap CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 전체 배경 색상 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F9FA; /* 배경색 변경 */
+        }
+
+        /* 네비게이션 바 색상 */
+        .navbar-custom {
+            background-color: #343A40; /* 네비바 색 변경 */
+        }
+
+        /* 네비게이션 바 텍스트 및 링크 색상 */
+        .navbar-brand, .nav-link, .btn-outline-primary {
+            color: #ffffff !important; /* 흰색 텍스트 */
+        }
+
+        /* 액티브 링크의 텍스트 굵게 */
+        .nav-link.active {
+            font-weight: bold;
+        }
+
+        /* 자치구 이름을 위한 스타일 */
+        .district-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #343A40;
+            padding: 10px 0;
+        }
+
+        /* 게시글 컨텐츠 스타일 */
+        .content-wrapper {
+            padding-left: 30px;
+        }
+
+        .content-list {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-list .list-group-item {
+            border: none;
+            background-color: #6F42C1; /* 버튼 색 변경 */
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        .content-list .list-group-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .content-list .list-group-item span {
+            font-weight: lighter;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* 버튼 색상 변경 (네비게이션 바 외) */
+        .btn-primary {
+            background-color: #6F42C1;
+            border-color: #6F42C1;
+        }
+    </style>
 </head>
 <body>
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- 네비게이션 바 -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">집구해조</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="navbar-brand ms-5" href="{% url 'gangnam' %}">메인</a> <!-- 홈으로 리다이렉트 -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-5">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" href="{% url 'gangnam' %}">커뮤니티</a> <!-- 커뮤니티로 리다이렉트 -->
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">커뮤니티</a>
-                    </li>
-                </ul>
-
-                <!-- 로그인 상태에 따라 다른 UI 보여주기 -->
-                <ul class="navbar-nav ms-auto">
-                    <!-- 로그인 전 상태 -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">로그인</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">회원가입</a>
-                    </li>
-
-                    <!-- 로그인 후 상태 -->
-                    <!-- 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            사용자 이름
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">내 프로필</a></li>
-                            <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                        </ul>
-                    </li>
-                    -->
                 </ul>
             </div>
+            <a class="btn btn-outline-primary" href="{% url 'gangnam' %}">로그인</a> <!-- 로그인 페이지로 이동 -->
         </div>
     </nav>
+    
+    <!-- 자치구 이름 표시 -->
+    <div class="container">
+        <div class="district-name">
+            <!-- Django 템플릿을 사용하여 자치구 이름을 동적으로 표시 -->
+            {{ district_name }}_
+        </div>
+    </div>
 
-
-  <!-- 상세페이지 -->
+    <!-- 상세페이지 -->
     <div class="container mt-4">
         <h2>첫 번째 게시물</h2>
         <div class="mb-3">
             <span><strong>작성자:</strong> 관리자</span> | 
-            <span><strong>작성일:</strong> 2024-10-15</span> | 
-            <span><strong>조회수:</strong> 100</span>
+            <span><strong>작성일:</strong> 2024-10-15</span> |
         </div>
         <div class="border p-3 mb-3">
-            <p>여기에 게시물 내용이 들어갑니다. 이 내용은 예시입니다.</p>
+            <p>여기에 게시물 내용이 들어갑니다.</p>
         </div>
         <a href="board.html" class="btn btn-secondary">목록으로</a>
     </div>
+
     <!-- 댓글 섹션 -->
     <div class="container mt-5">
         <h4>댓글</h4>
@@ -113,3 +165,6 @@
     </div>
 </body>
 </html>
+
+
+

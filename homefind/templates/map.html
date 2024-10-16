@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Finder</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Naver Map API -->
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=uevjdnc1s1"></script>
+    <style>
+        #map {
+            width: 90%;
+            height: 500px;
+            margin-top: 20px;
+        }
+        .toggle-buttons {
+            position: relative; /* 기준 위치 설정 */
+            margin: 0; /* 기본 여백 제거 */
+            top: 80px; /* 아래로 이동 */
+            right: 280px; /* 왼쪽 정렬 */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Home Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Board</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Map</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Toggle Buttons -->
+    <div class="container toggle-buttons text-center">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active" id="villaBtn">
+                <input type="radio" name="options" id="villa" autocomplete="off" checked> 빌라
+            </label>
+            <label class="btn btn-secondary" id="officetelBtn">
+                <input type="radio" name="options" id="officetel" autocomplete="off"> 오피스텔
+            </label>
+            <label class="btn btn-secondary" id="oneroomBtn">
+                <input type="radio" name="options" id="oneroom" autocomplete="off"> 원룸
+            </label>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Average Cost</h1>
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Seoul district list -->
+                <h5>지역</h5>
+                <ul class="list-group mb-4" id="district-list">
+                    <li class="list-group-item" data-district="Gangnam" data-lat="37.4979" data-lng="127.0276">강남</li>
+                    <li class="list-group-item" data-district="Gangsu" data-lat="37.5510" data-lng="126.8495">강서</li>
+                    <li class="list-group-item" data-district="Gwangjin" data-lat="37.5387" data-lng="127.0828">광진</li>
+                    <li class="list-group-item" data-district="Nowon" data-lat="37.6543" data-lng="127.0564">노원</li>
+                    <li class="list-group-item" data-district="Dongdaemun" data-lat="37.5743" data-lng="127.0397">동대문</li>
+                    <li class="list-group-item" data-district="Seongbuk" data-lat="37.5894" data-lng="127.0167">성북</li>
+                    <li class="list-group-item" data-district="Seongdong" data-lat="37.5612" data-lng="127.0378">성동</li>
+                    <li class="list-group-item" data-district="Songpa" data-lat="37.5146" data-lng="127.1055">송파</li>
+                    <li class="list-group-item" data-district="Yongsan" data-lat="37.5335" data-lng="126.9816">용산</li>
+                    <li class="list-group-item" data-district="Jongno" data-lat="37.5735" data-lng="126.9790">종로</li>
+                </ul>
+
+                <!-- Toggle buttons Map -->
+                <div class="btn-group-vertical w-100">
+                    <button id="toggle-board" class="btn btn-secondary btn-sm mt-2">Show Board</button>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <!-- Map Container -->
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 네이버 지도 초기화
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.5665, 126.9780), // 서울시청 좌표
+            zoom: 10
+        };
+        var map = new naver.maps.Map('map', mapOptions);
+
+        // 각 구의 가격 정보 (빌라, 오피스텔, 원룸)
+        var districtData = {
+           "Gangnam": {
+                villa: { 매매: 1500000, 전세: 800000, 월세: 300000 },
+                officetel: { 매매: 2000000, 전세: 900000, 월세: 350000 },
+                oneroom: { 매매: 1000000, 전세: 500000, 월세: 200000 }
+            },
+            "Gangsu": {
+                villa: { 매매: 1200000, 전세: 700000, 월세: 250000 },
+                officetel: { 매매: 1800000, 전세: 750000, 월세: 300000 },
+                oneroom: { 매매: 900000, 전세: 400000, 월세: 150000 }
+            },
+            "Gwangjin": {
+                villa: { 매매: 1300000, 전세: 720000, 월세: 260000 },
+                officetel: { 매매: 1900000, 전세: 850000, 월세: 320000 },
+                oneroom: { 매매: 950000, 전세: 450000, 월세: 180000 }
+            },
+            "Nowon": {
+                villa: { 매매: 1100000, 전세: 680000, 월세: 240000 },
+                officetel: { 매매: 1700000, 전세: 800000, 월세: 290000 },
+                oneroom: { 매매: 850000, 전세: 380000, 월세: 160000 }
+            },
+            "Dongdaemun": {
+                villa: { 매매: 1400000, 전세: 750000, 월세: 270000 },
+                officetel: { 매매: 1950000, 전세: 880000, 월세: 330000 },
+                oneroom: { 매매: 980000, 전세: 420000, 월세: 170000 }
+            },
+            "Seongbuk": {
+                villa: { 매매: 1350000, 전세: 730000, 월세: 265000 },
+                officetel: { 매매: 1850000, 전세: 840000, 월세: 310000 },
+                oneroom: { 매매: 920000, 전세: 430000, 월세: 175000 }
+            },
+            "Seongdong": {
+                villa: { 매매: 1250000, 전세: 700000, 월세: 255000 },
+                officetel: { 매매: 1750000, 전세: 780000, 월세: 280000 },
+                oneroom: { 매매: 880000, 전세: 390000, 월세: 155000 }
+            },
+            "Songpa": {
+                villa: { 매매: 1600000, 전세: 770000, 월세: 275000 },
+                officetel: { 매매: 2100000, 전세: 950000, 월세: 360000 },
+                oneroom: { 매매: 1100000, 전세: 500000, 월세: 220000 }
+            },
+            "Yongsan": {
+                villa: { 매매: 1450000, 전세: 760000, 월세: 280000 },
+                officetel: { 매매: 2000000, 전세: 900000, 월세: 340000 },
+                oneroom: { 매매: 1020000, 전세: 520000, 월세: 210000 }
+            },
+            "Jongno": {
+                villa: { 매매: 1550000, 전세: 820000, 월세: 290000 },
+                officetel: { 매매: 2050000, 전세: 920000, 월세: 370000 },
+                oneroom: { 매매: 1050000, 전세: 550000, 월세: 230000 }
+            }
+        };
+
+        var currentMarker = null;  // 현재 표시된 마커
+        var infoWindow = new naver.maps.InfoWindow();  // 정보창 생성
+        var selectedType = 'villa'; // 기본 선택된 타입
+
+        // 타입을 변경할 때 호출되는 함수
+        function updateSelectedType(newType) {
+            selectedType = newType;
+            updateToggleButtons(); // 버튼 스타일 업데이트
+        }
+
+        // 토글 버튼의 스타일을 업데이트하는 함수
+        function updateToggleButtons() {
+            document.getElementById('villaBtn').classList.remove('active');
+            document.getElementById('officetelBtn').classList.remove('active');
+            document.getElementById('oneroomBtn').classList.remove('active');
+
+            if (selectedType === 'villa') {
+                document.getElementById('villaBtn').classList.add('active');
+            } else if (selectedType === 'officetel') {
+                document.getElementById('officetelBtn').classList.add('active');
+            } else if (selectedType === 'oneroom') {
+                document.getElementById('oneroomBtn').classList.add('active');
+            }
+        }
+
+        // 토글 버튼 클릭 이벤트 처리
+        document.querySelectorAll('.btn-group-toggle input').forEach(function(btn) {
+            btn.addEventListener('change', function() {
+                updateSelectedType(this.id);
+            });
+        });
+
+        // 리스트 항목 클릭 이벤트 처리
+        document.getElementById('district-list').addEventListener('click', function(e) {
+            if (e.target.tagName === 'LI') {
+                var district = e.target.getAttribute('data-district');
+                var lat = parseFloat(e.target.getAttribute('data-lat'));
+                var lng = parseFloat(e.target.getAttribute('data-lng'));
+
+                // 선택된 타입에 따른 가격 정보
+                var data = districtData[district][selectedType];
+                var infoContent = `
+                    <div style="padding:10px;">
+                        <h5>${district} (${selectedType})</h5>
+                        <p><strong>매매:</strong> ${data.매매}원</p>
+                        <p><strong>전세:</strong> ${data.전세}원</p>
+                        <p><strong>월세:</strong> ${data.월세}원</p>
+                    </div>`;
+
+                // 기존 마커 제거
+                if (currentMarker) {
+                    currentMarker.setMap(null);
+                }
+
+                // 지도 중심을 해당 구로 이동
+                var newCenter = new naver.maps.LatLng(lat, lng);
+                map.setCenter(newCenter);
+                map.setZoom(12);
+
+                // 새로운 마커 표시
+                currentMarker = new naver.maps.Marker({
+                    position: newCenter,
+                    map: map
+                });
+
+                // 정보창 표시
+                infoWindow.setContent(infoContent);
+                infoWindow.open(map, currentMarker);
+            }
+        });
+
+        document.getElementById('toggle-board').addEventListener('click', function() {
+            window.location.href = 'index';
+        });
+    </script>
+</body>
+</html>
