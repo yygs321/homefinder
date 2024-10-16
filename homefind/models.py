@@ -6,6 +6,9 @@ class Region(models.Model):
     # 지역 이름(구 이름)
     region_name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.region_name
+
 
 # 하나의 부동산 매매물 모델
 class RealEstate(models.Model):
