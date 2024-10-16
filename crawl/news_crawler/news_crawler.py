@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime, timedelta
-from frequency_counter import count_frequency  # 빈도수 계산 함수 import
-#from db_connector import save_to_db  # DB 저장 함수 import
+from frequency_counter import count_frequency
+from db_connector import save_to_db, save_to_redis, check_cache_and_update_if_needed
 import time
 
 # Chrome 드라이버 경로 설정
@@ -52,16 +52,12 @@ def crawl_news(city_no, dvsn_no):
                 flag=1
                 break
 
-            # 빈도수 계산하고 결과를 DB에 저장
+            # 빈도수 계산하고 결과를 리스트에 추가
             count_frequency(title, frequency_data, today)
             #save_to_db(frequency_data)
 
-        print(f"{page} 페이지 크롤링 완료.")
         page += 1
 
-    for data in frequency_data:
-        print(data)
-    return
 
 # 자치구 코드를 사용한 크롤링 실행
 districts = {
@@ -92,10 +88,16 @@ districts = {
     "중랑구": "1126000000"
 }
 
-# 각 자치구에 대해 크롤링
-for district, dvsn_no in districts.items():
-    print(f"{district} ({dvsn_no}) 뉴스 크롤링 시작.")
-    crawl_news("1100000000", dvsn_no)
-    print("----")
 
+if check_cache_and_update_if_needed(): #캐시가 없거나 기간이 지난 경우 크롤링
+    for district, dvsn_no in districts.items():
+        print(f"{district} 뉴스 크롤링 시작")
+        crawl_news("1100000000", dvsn_no)
+        print(f"{district} 뉴스 크롤링 완료")
+        print("------------------------")
 
+    # 크롤링이 완료된 후 DB와 Redis에 저장
+    save_to_db(frequency_data)
+    save_to_redis(frequency_data)
+else:
+    print("캐시 데이터에서 읽어옵니다.")

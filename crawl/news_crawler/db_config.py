@@ -3,7 +3,7 @@ MYSQL_DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
     'password': 'root',
-    'database': 'home-finder-db'
+    'database': 'home_finder_db'
 }
 
 # Redis 연결 설정
