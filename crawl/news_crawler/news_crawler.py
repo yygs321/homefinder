@@ -1,57 +1,67 @@
-import requests
-from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from datetime import datetime, timedelta
 from frequency_counter import count_frequency  # 빈도수 계산 함수 import
 #from db_connector import save_to_db  # DB 저장 함수 import
+import time
 
-#3달치만 확인
+# Chrome 드라이버 경로 설정
+chrome_service = Service(r'C:\Program Files\chromeDriver\chromedriver-win64\chromedriver.exe')
+chrome_options = Options()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-dev-shm-usage')
+
+driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+
 today = datetime.today()
-three_months_ago = today - timedelta(days=90)
+three_months_ago = today - timedelta(days=180)
 
-# 각 자치구별로 빈도수를 누적해서 계산할 리스트
+# 각 자치구별로 빈도수 리스트
 frequency_data = []
 
 def crawl_news(city_no, dvsn_no):
     page = 1
     base_url = f"https://m2.land.naver.com/news/region?cityNo={city_no}&dvsnNo={dvsn_no}"
 
-    while True:
+    flag = 0
+    while not flag:
         if page == 1:
             url = base_url
         else:
             url = f"{base_url}&page={page}"
 
-        response = requests.get(url)
-        print(response)
+        driver.get(url)
 
-        soup = BeautifulSoup(response.content, "html.parser")
 
-        news_list = soup.select('ul#newsList li.u_lst_l')
+        news_list = driver.find_elements(By.CSS_SELECTOR, 'ul#newsList li.u_lst_l')
 
         if not news_list:
             break
 
         for news_item in news_list:
-            title = news_item.select_one('strong.tit').text.strip()
-            date_str = news_item.select_one('em.if_text').text.strip().split()[-1]
+            title = news_item.find_element(By.CSS_SELECTOR, 'strong.tit').text.strip()
+            date_str = news_item.find_element(By.CSS_SELECTOR, 'em.if_text').text[-11:].split(' ')[-1].replace('.', '')
 
-            pub_date = datetime.strptime(date_str, '%Y.%m.%d')
-            print(pub_date)
+
+            pub_date = datetime.strptime(date_str, '%Y%m%d')
 
             # 날짜가 3개월 이전이면 크롤링 중단
             if pub_date < three_months_ago:
-                return
+                flag=1
+                break
 
             # 빈도수 계산하고 결과를 DB에 저장
             count_frequency(title, frequency_data, pub_date)
             #save_to_db(frequency_data)
 
-        for data in frequency_data:
-            print("----")
-            print(data)
         print(f"{page} 페이지 크롤링 완료.")
-        page += 1  # 다음 페이지로 이동
+        page += 1
 
+    for data in frequency_data:
+        print(data)
+    return
 
 # 자치구 코드를 사용한 크롤링 실행
 districts = {
@@ -86,5 +96,6 @@ districts = {
 for district, dvsn_no in districts.items():
     print(f"{district} ({dvsn_no}) 뉴스 크롤링 시작.")
     crawl_news("1100000000", dvsn_no)
+    print("----")
 
 
