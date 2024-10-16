@@ -1,7 +1,5 @@
 from django.db import models
-
-from django.utils import timezone
-import datetime
+from django.urls import reverse
 
 class UserModel(models.Model): # 사용자
     username = models.CharField(max_length=20,verbose_name='유저ID') # 유저ID
@@ -30,7 +28,19 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title  # 게시물 제목을 반환
+    
+    def get_absolute_url(self):
+        return reverse('gangnam', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    user_id = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content[:20]

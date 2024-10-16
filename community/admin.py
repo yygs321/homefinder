@@ -3,6 +3,7 @@ from .models import *
 
 admin.site.register(UserModel)
 admin.site.register(BoardModel)
+admin.site.register(Comment)
 
 from .models import Post
 
