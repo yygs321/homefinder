@@ -16,7 +16,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
 today = datetime.today()
-three_months_ago = today - timedelta(days=180)
+six_months_ago = today - timedelta(days=180)
 
 # 각 자치구별로 빈도수 리스트
 frequency_data = []
@@ -48,12 +48,12 @@ def crawl_news(city_no, dvsn_no):
             pub_date = datetime.strptime(date_str, '%Y%m%d')
 
             # 날짜가 3개월 이전이면 크롤링 중단
-            if pub_date < three_months_ago:
+            if pub_date < six_months_ago:
                 flag=1
                 break
 
             # 빈도수 계산하고 결과를 DB에 저장
-            count_frequency(title, frequency_data, pub_date)
+            count_frequency(title, frequency_data, today)
             #save_to_db(frequency_data)
 
         print(f"{page} 페이지 크롤링 완료.")

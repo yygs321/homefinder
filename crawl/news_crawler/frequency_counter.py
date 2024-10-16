@@ -1,6 +1,6 @@
 def count_frequency(title, frequency_data, pub_date):
-    transaction_methods = ['매매', '전세', '월세']
-    real_estate_types = ['오피스텔', '빌라', '원룸']
+    transaction_methods = ['매매', '전세', '월세', '보증금', '분양', '재건축']
+    real_estate_types = ['아파트', '오피스텔', '빌라', '원룸']
     districts = ['강남', '강동', '강북', '강서', '관악', '광진', '구로', '금천', '노원', '도봉', '동대문', '동작', '마포', '서대문', '서초', '성동', '성북', '송파', '양천', '영등포', '용산', '은평', '종로', '중구', '중랑']
 
     for transaction_method in transaction_methods:
