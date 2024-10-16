@@ -52,4 +52,4 @@ class RealEstate(models.Model):
     )  # 건물 타입 (빌라, 원룸, 오피스텔)
 
     def __str__(self):
-        return self.region.region_name + '/' + self.house_name + '/' + '가격: ' + str(self.price)
+        return self.region.region_name + '/' + self.house_name + '/' + self.type + '/' + self.category + '/' + '가격: ' + str(self.price)
