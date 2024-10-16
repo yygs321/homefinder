@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('homefind/', include('homefind.urls')),
+    path('', include('community.urls')),  # 기본 URL에 community.urls 포함
     path('community/', include('community.urls'))
 ]
