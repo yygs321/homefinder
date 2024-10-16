@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import PostDetailView
+from .views import PostDetailView, PostCreateView
 
 urlpatterns = [
     path('community/', views.index, name='index'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('seocho/', views.seocho_view, name='seocho'),
     path('songpa/', views.songpa_view, name='songpa'),
     path('post_<int:board_id>/', PostDetailView.as_view(), name='post-detail'),
+    path('create/', PostCreateView.as_view(), name='post_create'),
     path('logout/', views.logout_view, name='logout'),
 ]
 

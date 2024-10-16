@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
-
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
 from django.http import HttpResponse
-
-from django.views.generic import DetailView
-
+from django.views.generic import DetailView, CreateView
+from django.urls import reverse_lazy
+from .models import Post
 from .models import *
 
 # 회원가입 기능
@@ -106,3 +104,17 @@ class PostDetailView(DetailView):
     def get_object(self, queryset=None):
         board_id = self.kwargs.get('board_id')
         return self.model.objects.get(board_id=board_id)  # post_id를 사용하여 객체 가져오기
+
+
+#@login_required  # 로그인한 사용자만 글 작성 가능
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post_create.html'
+    context_object_name = 'post'
+    fields = ['region_id', 'title', 'content']  # 폼에 포함될 필드들
+    success_url = reverse_lazy('post_list')  # 성공 시 리다이렉트할 URL
+
+    def form_valid(self, form):
+        # 현재 로그인한 사용자 추가
+        form.instance.user_id = self.request.user
+        return super().form_valid(form)
