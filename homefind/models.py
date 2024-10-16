@@ -12,13 +12,13 @@ class RealEstate(models.Model):
     price = models.FloatField(default=0)  # 매매가, 보증금 컬럼
     rent_price = models.FloatField(default=0)  # 월세 컬럼
 
-    SELL = 'sell'  # 매매
-    LEASE = 'lease'  # 전세
-    MONTHLYRENT = 'monthlyRent'  # 월세
+    SELL = '매매'  # 매매
+    LEASE = '전세'  # 전세
+    MONTHLYRENT = '월세'  # 월세
     CATEGORY_CHOICES = [
-        (SELL, 'sell'),
-        (LEASE, 'lease'),
-        (MONTHLYRENT, 'monthlyRent'),
+        (SELL, '매매'),
+        (LEASE, '전세'),
+        (MONTHLYRENT, '월세'),
     ]
 
     category = models.CharField(
@@ -33,13 +33,13 @@ class RealEstate(models.Model):
     
     region = models.ForeignKey(Region, related_name='real_estates', on_delete=models.CASCADE)  # 속한 구
 
-    VILLA = 'villa'  # 빌라
-    OFFICETEL = 'officetel'  # 오피스텔
-    ONEROOM = 'oneroom'  # 원룸
+    VILLA = '빌라'  # 빌라
+    OFFICETEL = '오피스텔'  # 오피스텔
+    ONEROOM = '원룸'  # 원룸
     TYPE_CHOICES = [
-        (VILLA, 'villa'),
-        (OFFICETEL, 'officetel'),
-        (ONEROOM, 'oneroom'),
+        (VILLA, '빌라'),
+        (OFFICETEL, '오피스텔'),
+        (ONEROOM, '원룸'),
     ]
 
     type = models.CharField(
