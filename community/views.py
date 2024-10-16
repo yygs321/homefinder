@@ -3,11 +3,17 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib.auth.decorators import login_required
+
 from django.http import HttpResponse
 from django.views.generic import DetailView, CreateView
 from django.urls import reverse_lazy
 from .models import Post
 from .models import *
+
+from django.views.generic import DetailView
+from .models import Post
 
 # 회원가입 기능
 def sign_up_view(request):
@@ -59,11 +65,14 @@ def logout_view(request):
 
 
 # 게시판
+# 게시글 상세 보기
 def detail(request, board_id):
     board = BoardModel.objects.get(id=board_id)
     context = {'board': board}
     return render(request, 'community/detail.html', context)
 
+# 게시글 생성
+@login_required # 로그인한 사용자만 가능
 def create_board_view(request):
     if request.method == 'GET':
         return render(request, 'community/create_board.html')
@@ -73,18 +82,21 @@ def create_board_view(request):
         region_id = request.POST.get('region_id')
         username = request.user  # 현재 로그인한 사용자
 
+        # 새로운 게시글 생성
         new_board = BoardModel(title=title, contents=contents, region_id=region_id, username=username)
         new_board.save()
         return redirect('index')
 
-
+# 메인페이지
 def index(request):
     return render(request, 'community/index.html')  # index.html 템플릿을 렌더링
 
+# 게시글 목록 보기
 def board_list_view(request):
     boards = BoardModel.objects.all()  # 모든 게시글 조회
     context = {'boards': boards}
     return render(request, 'community/board_list.html', context)  # board_list.html 템플릿 렌더링
+
 
 
 def gangnam_view(request):
@@ -95,6 +107,7 @@ def seocho_view(request):
 
 def songpa_view(request):
     return render(request, 'songpa.html')
+
 
 class PostDetailView(DetailView):
     model = Post
