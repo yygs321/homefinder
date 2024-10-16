@@ -52,6 +52,7 @@ def save_to_redis(frequency_data):
         category, value, count, date = record
 
         redis_key = f"{category}:{value}"
+        # hmset으로 값을 저장할 때 모든 값은 문자열로 저장됨
         redis_client.hmset(redis_key, {"count": count, "date": date})
     print(f"Redis에 데이터 저장")
 
@@ -62,7 +63,6 @@ def check_cache_and_update_if_needed():
         print("캐시 데이터가 없어 크롤링 진행")
         return True
 
-    # 첫 번째 데이터의 날짜 확인
     cached_data = redis_client.hgetall(keys[0])
     if b'date' in cached_data:
         # 바이트 문자열을 UTF-8로 디코딩
@@ -74,3 +74,21 @@ def check_cache_and_update_if_needed():
 
     print("캐시가 유효하여 크롤링을 진행하지 않습니다.")
     return False
+
+def get_cached_data():
+    keys = redis_client.keys()
+    all_data = []
+
+    for key in keys:
+        key_decoded = key.decode('utf-8')
+        category, value = key_decoded.split(':')
+
+        cached_data = redis_client.hgetall(key)
+
+        count = int(cached_data[b'count'])  # count는 정수로 변환
+        date = cached_data[b'date'].decode('utf-8')  # date는 UTF-8로 변환
+
+        # 데이터를 리스트에 추가
+        all_data.append((category, value, count, date))
+
+    return all_data
