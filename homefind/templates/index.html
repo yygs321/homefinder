@@ -115,55 +115,97 @@
 
         // Data sets for sales and rent
         const districtData1 = {
-            Jongno: { sales: [100, 150, 200], rent: [70, 120, 170], monthly: [120, 110, 170] },
-            Gangsu: { sales: [80, 130, 180], rent: [60, 110, 160], monthly: [120, 110, 170] },
-            Yongsan: { sales: [90, 140, 190], rent: [65, 115, 165], monthly: [120, 110, 170] },
-            Seongdong: { sales: [120, 170, 220], rent: [85, 135, 185], monthly: [120, 110, 170] },
-            Gwangjin: { sales: [130, 180, 230], rent: [95, 145, 195], monthly: [120, 110, 170] },
-            Dongdaemun: { sales: [110, 160, 210], rent: [75, 125, 175], monthly: [120, 110, 170] },
-            Nowon: { sales: [105, 155, 205], rent: [72, 122, 172], monthly: [120, 110, 170] },
-            Seongbuk: { sales: [115, 165, 215], rent: [82, 132, 182], monthly: [120, 110, 170] },
-            Gangnam: { sales: [200, 250, 300], rent: [140, 190, 240], monthly: [120, 110, 170] },
-            Songpa: { sales: [190, 240, 290], rent: [130, 180, 230], monthly: [120, 110, 170] }
+            Jongno: { sales: [{{ districtData1.종로구.sales.0 }}, {{ districtData1.종로구.sales.1 }}, {{ districtData1.종로구.sales.2 }}], rent: [{{ districtData1.종로구.rent.0 }}, {{ districtData1.종로구.rent.1 }}, {{ districtData1.종로구.rent.2 }}], monthly: [{{ districtData1.종로구.monthly.0 }}, {{ districtData1.종로구.monthly.1 }}, {{ districtData1.종로구.monthly.2 }}] },
+            Gangsu: { sales: [{{ districtData1.강서구.sales.0 }}, {{ districtData1.강서구.sales.1 }}, {{ districtData1.강서구.sales.2 }}], rent: [{{ districtData1.강서구.rent.0 }}, {{ districtData1.강서구.rent.1 }}, {{ districtData1.강서구.rent.2 }}], monthly: [{{ districtData1.강서구.monthly.0 }}, {{ districtData1.강서구.monthly.1 }}, {{ districtData1.강서구.monthly.2 }}] },
+            Yongsan: { sales: [{{ districtData1.용산구.sales.0 }}, {{ districtData1.용산구.sales.1 }}, {{ districtData1.용산구.sales.2 }}], rent: [{{ districtData1.용산구.rent.0 }}, {{ districtData1.용산구.rent.1 }}, {{ districtData1.용산구.rent.2 }}], monthly: [{{ districtData1.용산구.monthly.0 }}, {{ districtData1.용산구.monthly.1 }}, {{ districtData1.용산구.monthly.2 }}] },
+            Seongdong: { sales: [{{ districtData1.성동구.sales.0 }}, {{ districtData1.성동구.sales.1 }}, {{ districtData1.성동구.sales.2 }}], rent: [{{ districtData1.성동구.rent.0 }}, {{ districtData1.성동구.rent.1 }}, {{ districtData1.성동구.rent.2 }}], monthly: [{{ districtData1.성동구.monthly.0 }}, {{ districtData1.성동구.monthly.1 }}, {{ districtData1.성동구.monthly.2 }}] },
+            Gwangjin: { sales: [{{ districtData1.광진구.sales.0 }}, {{ districtData1.광진구.sales.1 }}, {{ districtData1.광진구.sales.2 }}], rent: [{{ districtData1.광진구.rent.0 }}, {{ districtData1.광진구.rent.1 }}, {{ districtData1.광진구.rent.2 }}], monthly: [{{ districtData1.광진구.monthly.0 }}, {{ districtData1.광진구.monthly.1 }}, {{ districtData1.광진구.monthly.2 }}] },
+            Dongdaemun: { sales: [{{ districtData1.동대문구.sales.0 }}, {{ districtData1.동대문구.sales.1 }}, {{ districtData1.동대문구.sales.2 }}], rent: [{{ districtData1.동대문구.rent.0 }}, {{ districtData1.동대문구.rent.1 }}, {{ districtData1.동대문구.rent.2 }}], monthly: [{{ districtData1.동대문구.monthly.0 }}, {{ districtData1.동대문구.monthly.1 }}, {{ districtData1.동대문구.monthly.2 }}] },
+            Nowon: { sales: [{{ districtData1.노원구.sales.0 }}, {{ districtData1.노원구.sales.1 }}, {{ districtData1.노원구.sales.2 }}], rent: [{{ districtData1.노원구.rent.0 }}, {{ districtData1.노원구.rent.1 }}, {{ districtData1.노원구.rent.2 }}], monthly: [{{ districtData1.노원구.monthly.0 }}, {{ districtData1.노원구.monthly.1 }}, {{ districtData1.노원구.monthly.2 }}] },
+            Seongbuk: { sales: [{{ districtData1.성북구.sales.0 }}, {{ districtData1.성북구.sales.1 }}, {{ districtData1.성북구.sales.2 }}], rent: [{{ districtData1.성북구.rent.0 }}, {{ districtData1.성북구.rent.1 }}, {{ districtData1.성북구.rent.2 }}], monthly: [{{ districtData1.성북구.monthly.0 }}, {{ districtData1.성북구.monthly.1 }}, {{ districtData1.성북구.monthly.2 }}] },
+            Gangnam: { sales: [{{ districtData1.강남구.sales.0 }}, {{ districtData1.강남구.sales.1 }}, {{ districtData1.강남구.sales.2 }}], rent: [{{ districtData1.강남구.rent.0 }}, {{ districtData1.강남구.rent.1 }}, {{ districtData1.강남구.rent.2 }}], monthly: [{{ districtData1.강남구.monthly.0 }}, {{ districtData1.강남구.monthly.1 }}, {{ districtData1.강남구.monthly.2 }}] },
+            Songpa: { sales: [{{ districtData1.송파구.sales.0 }}, {{ districtData1.송파구.sales.1 }}, {{ districtData1.송파구.sales.2 }}], rent: [{{ districtData1.송파구.rent.0 }}, {{ districtData1.송파구.rent.1 }}, {{ districtData1.송파구.rent.2 }}], monthly: [{{ districtData1.송파구.monthly.0 }}, {{ districtData1.송파구.monthly.1 }}, {{ districtData1.송파구.monthly.2 }}] }
         };
+
 
         const districtData2 = {
-            Jongno: { villa: [100, 150, 200], officetel: [70, 120, 170], oneroom: [120, 110, 170] },
-            Gangsu: { villa: [80, 130, 180], officetel: [60, 110, 160], oneroom: [120, 110, 170] },
-            Yongsan: { villa: [90, 140, 190], officetel: [65, 115, 165], oneroom: [120, 110, 170] },
-            Seongdong: { villa: [120, 170, 220], officetel: [85, 135, 185], oneroom: [120, 110, 170] },
-            Gwangjin: { villa: [130, 180, 230], officetel: [95, 145, 195], oneroom: [120, 110, 170] },
-            Dongdaemun: { villa: [110, 160, 210], officetel: [75, 125, 175], oneroom: [120, 110, 170] },
-            Nowon: { villa: [105, 155, 205], officetel: [72, 122, 172], oneroom: [120, 110, 170] },
-            Seongbuk: { villa: [115, 165, 215], officetel: [82, 132, 182], oneroom: [120, 110, 170] },
-            Gangnam: { villa: [200, 250, 300], officetel: [140, 190, 240], oneroom: [120, 110, 170] },
-            Songpa: { villa: [190, 240, 290], officetel: [130, 180, 230], oneroom: [120, 110, 170] }
-        };
+            Jongno: {
+                villa: [{{ districtData2.종로구.villa.0 }}, {{ districtData2.종로구.villa.1 }}, {{ districtData2.종로구.villa.2 }}],
+                officetel: [{{ districtData2.종로구.officetel.0 }}, {{ districtData2.종로구.officetel.1 }}, {{ districtData2.종로구.officetel.2 }}],
+                oneroom: [{{ districtData2.종로구.oneroom.0 }}, {{ districtData2.종로구.oneroom.1 }}, {{ districtData2.종로구.oneroom.2 }}]
+            },
+            Gangsu: {
+                villa: [{{ districtData2.강서구.villa.0 }}, {{ districtData2.강서구.villa.1 }}, {{ districtData2.강서구.villa.2 }}],
+                officetel: [{{ districtData2.강서구.officetel.0 }}, {{ districtData2.강서구.officetel.1 }}, {{ districtData2.강서구.officetel.2 }}],
+                oneroom: [{{ districtData2.강서구.oneroom.0 }}, {{ districtData2.강서구.oneroom.1 }}, {{ districtData2.강서구.oneroom.2 }}]
+            },
+            Yongsan: {
+                villa: [{{ districtData2.용산구.villa.0 }}, {{ districtData2.용산구.villa.1 }}, {{ districtData2.용산구.villa.2 }}],
+                officetel: [{{ districtData2.용산구.officetel.0 }}, {{ districtData2.용산구.officetel.1 }}, {{ districtData2.용산구.officetel.2 }}],
+                oneroom: [{{ districtData2.용산구.oneroom.0 }}, {{ districtData2.용산구.oneroom.1 }}, {{ districtData2.용산구.oneroom.2 }}]
+            },
+            Seongdong: {
+                villa: [{{ districtData2.성동구.villa.0 }}, {{ districtData2.성동구.villa.1 }}, {{ districtData2.성동구.villa.2 }}],
+                officetel: [{{ districtData2.성동구.officetel.0 }}, {{ districtData2.성동구.officetel.1 }}, {{ districtData2.성동구.officetel.2 }}],
+                oneroom: [{{ districtData2.성동구.oneroom.0 }}, {{ districtData2.성동구.oneroom.1 }}, {{ districtData2.성동구.oneroom.2 }}]
+            },
+            Gwangjin: {
+                villa: [{{ districtData2.광진구.villa.0 }}, {{ districtData2.광진구.villa.1 }}, {{ districtData2.광진구.villa.2 }}],
+                officetel: [{{ districtData2.광진구.officetel.0 }}, {{ districtData2.광진구.officetel.1 }}, {{ districtData2.광진구.officetel.2 }}],
+                oneroom: [{{ districtData2.광진구.oneroom.0 }}, {{ districtData2.광진구.oneroom.1 }}, {{ districtData2.광진구.oneroom.2 }}]
+            },
+            Dongdaemun: {
+                villa: [{{ districtData2.동대문구.villa.0 }}, {{ districtData2.동대문구.villa.1 }}, {{ districtData2.동대문구.villa.2 }}],
+                officetel: [{{ districtData2.동대문구.officetel.0 }}, {{ districtData2.동대문구.officetel.1 }}, {{ districtData2.동대문구.officetel.2 }}],
+                oneroom: [{{ districtData2.동대문구.oneroom.0 }}, {{ districtData2.동대문구.oneroom.1 }}, {{ districtData2.동대문구.oneroom.2 }}]
+            },
+            Nowon: {
+                villa: [{{ districtData2.노원구.villa.0 }}, {{ districtData2.노원구.villa.1 }}, {{ districtData2.노원구.villa.2 }}],
+                officetel: [{{ districtData2.노원구.officetel.0 }}, {{ districtData2.노원구.officetel.1 }}, {{ districtData2.노원구.officetel.2 }}],
+                oneroom: [{{ districtData2.노원구.oneroom.0 }}, {{ districtData2.노원구.oneroom.1 }}, {{ districtData2.노원구.oneroom.2 }}]
+            },
+            Seongbuk: {
+                villa: [{{ districtData2.성북구.villa.0 }}, {{ districtData2.성북구.villa.1 }}, {{ districtData2.성북구.villa.2 }}],
+                officetel: [{{ districtData2.성북구.officetel.0 }}, {{ districtData2.성북구.officetel.1 }}, {{ districtData2.성북구.officetel.2 }}],
+                oneroom: [{{ districtData2.성북구.oneroom.0 }}, {{ districtData2.성북구.oneroom.1 }}, {{ districtData2.성북구.oneroom.2 }}]
+            },
+            Gangnam: {
+                villa: [{{ districtData2.강남구.villa.0 }}, {{ districtData2.강남구.villa.1 }}, {{ districtData2.강남구.villa.2 }}],
+                officetel: [{{ districtData2.강남구.officetel.0 }}, {{ districtData2.강남구.officetel.1 }}, {{ districtData2.강남구.officetel.2 }}],
+                oneroom: [{{ districtData2.강남구.oneroom.0 }}, {{ districtData2.강남구.oneroom.1 }}, {{ districtData2.강남구.oneroom.2 }}]
+            },
+            Songpa: {
+                villa: [{{ districtData2.송파구.villa.0 }}, {{ districtData2.송파구.villa.1 }}, {{ districtData2.송파구.villa.2 }}],
+                officetel: [{{ districtData2.송파구.officetel.0 }}, {{ districtData2.송파구.officetel.1 }}, {{ districtData2.송파구.officetel.2 }}],
+                oneroom: [{{ districtData2.송파구.oneroom.0 }}, {{ districtData2.송파구.oneroom.1 }}, {{ districtData2.송파구.oneroom.2 }}]
+            }
+        }
 
         const donutDistrictData1 = {
-            Jongno: [50, 30, 20],  // Example data for each district (월세, 전세, 매매)
-            Gangsu: [40, 35, 25],
-            Yongsan: [55, 25, 20],
-            Seongdong: [60, 20, 20],
-            Gwangjin: [45, 30, 25],
-            Dongdaemun: [50, 35, 15],
-            Nowon: [55, 30, 15],
-            Seongbuk: [40, 35, 25],
-            Gangnam: [70, 20, 10],
-            Songpa: [65, 25, 10]
+            Jongno: [{{ donutDistrictData1.종로구.0 }}, {{ donutDistrictData1.종로구.1 }}, {{ donutDistrictData1.종로구.2 }}],  // Example data for each district (월세, 전세, 매매)
+            Gangsu: [{{ donutDistrictData1.강서구.0 }}, {{ donutDistrictData1.강서구.1 }}, {{ donutDistrictData1.강서구.2 }}],
+            Yongsan: [{{ donutDistrictData1.용산구.0 }}, {{ donutDistrictData1.용산구.1 }}, {{ donutDistrictData1.용산구.2 }}],
+            Seongdong: [{{ donutDistrictData1.성동구.0 }}, {{ donutDistrictData1.성동구.1 }}, {{ donutDistrictData1.성동구.2 }}],
+            Gwangjin: [{{ donutDistrictData1.광진구.0 }}, {{ donutDistrictData1.광진구.1 }}, {{ donutDistrictData1.광진구.2 }}],
+            Dongdaemun: [{{ donutDistrictData1.동대문구.0 }}, {{ donutDistrictData1.동대문구.1 }}, {{ donutDistrictData1.동대문구.2 }}],
+            Nowon: [{{ donutDistrictData1.노원구.0 }}, {{ donutDistrictData1.노원구.1 }}, {{ donutDistrictData1.노원구.2 }}],
+            Seongbuk: [{{ donutDistrictData1.성북구.0 }}, {{ donutDistrictData1.성북구.1 }}, {{ donutDistrictData1.성북구.2 }}],
+            Gangnam: [{{ donutDistrictData1.강남구.0 }}, {{ donutDistrictData1.강남구.1 }}, {{ donutDistrictData1.강남구.2 }}],
+            Songpa: [{{ donutDistrictData1.송파구.0 }}, {{ donutDistrictData1.송파구.1 }}, {{ donutDistrictData1.송파구.2 }}]
         };
 
+
         const donutDistrictData2 = {
-            Jongno: [50, 30, 20],  // Example data for each district (월세, 전세, 매매)
-            Gangsu: [40, 35, 25],
-            Yongsan: [55, 25, 20],
-            Seongdong: [60, 20, 20],
-            Gwangjin: [45, 30, 25],
-            Dongdaemun: [50, 35, 15],
-            Nowon: [55, 30, 15],
-            Seongbuk: [40, 35, 25],
-            Gangnam: [70, 20, 10],
-            Songpa: [65, 25, 10]
+            Jongno: [{{ donutDistrictData2.종로구.0 }}, {{ donutDistrictData2.종로구.1 }}, {{ donutDistrictData2.종로구.2 }}],  // Example data for each district (월세, 전세, 매매)
+            Gangsu: [{{ donutDistrictData2.강서구.0 }}, {{ donutDistrictData2.강서구.1 }}, {{ donutDistrictData2.강서구.2 }}],
+            Yongsan: [{{ donutDistrictData2.용산구.0 }}, {{ donutDistrictData2.용산구.1 }}, {{ donutDistrictData2.용산구.2 }}],
+            Seongdong: [{{ donutDistrictData2.성동구.0 }}, {{ donutDistrictData2.성동구.1 }}, {{ donutDistrictData2.성동구.2 }}],
+            Gwangjin: [{{ donutDistrictData2.광진구.0 }}, {{ donutDistrictData2.광진구.1 }}, {{ donutDistrictData2.광진구.2 }}],
+            Dongdaemun: [{{ donutDistrictData2.동대문구.0 }}, {{ donutDistrictData2.동대문구.1 }}, {{ donutDistrictData2.동대문구.2 }}],
+            Nowon: [{{ donutDistrictData2.노원구.0 }}, {{ donutDistrictData2.노원구.1 }}, {{ donutDistrictData2.노원구.2 }}],
+            Seongbuk: [{{ donutDistrictData2.성북구.0 }}, {{ donutDistrictData2.성북구.1 }}, {{ donutDistrictData2.성북구.2 }}],
+            Gangnam: [{{ donutDistrictData2.강남구.0 }}, {{ donutDistrictData2.강남구.1 }}, {{ donutDistrictData2.강남구.2 }}],
+            Songpa: [{{ donutDistrictData2.송파구.0 }}, {{ donutDistrictData2.송파구.1 }}, {{ donutDistrictData2.송파구.2 }}]
         };
 
         const trendData1 = {
