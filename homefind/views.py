@@ -6,8 +6,13 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render
 
 
+def index(request):
+    return render(request, "index.html")
+def map(request):
+    return render(request, "map.html")
 class MapData(generics.GenericAPIView):
     def get(self, request):
         # Query parameters에서 최소, 최대 가격 및 카테고리 목록 가져오기
