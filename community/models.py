@@ -24,18 +24,6 @@ class BoardModel(models.Model):
     def __str__(self):
         return self.username
 
-# class Comment(models.Model): # 댓글
-#     comment_id = models.CharField(max_length=20) # 댓글 ID
-#     board_id = models.CharField(max_length=50) # 커뮤니티 ID
-#     username = models.ForeignKey(User, on_delete=models.CASCADE) # 댓글 작성자 ID
-#     content = models.CharField(max_length=50) # 댓글 내용
-#     created_date = models.DateTimeField('date published') # 생성일
-#     # votes = models.IntegerField(default=0)
-#     #is_something = models.BooleanField(default=False)
-#     #average_score = models.FloatField(default=0.0)
-
-#     def __str__(self):
-#         return f'{self.article_id}, 댓글작성자ID: {self.comment_id}, {self.created_date}'
 class Post(models.Model):
     board_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey('auth.User', on_delete=models.CASCADE) 
