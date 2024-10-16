@@ -288,5 +288,10 @@ cython_debug/
 pyrightconfig.json
 
 
+# macOS .DS_Store files
+**/.DS_Store
+
+*.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm"__pycache__/" 
 
