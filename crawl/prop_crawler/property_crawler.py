@@ -6,14 +6,13 @@ import time
 import requests
 
 class PropertyCrawler:
-    def __init__(self, folder_path, csv_file_path):
-        self.folder_path = folder_path
-        self.csv_file_path = csv_file_path
-        # FIXME: pyeongsu 삭제 등 데이터 변경 적용
+    def __init__(self, json_dir, result_dir):
+        self.folder_path = json_dir
+        self.csv_file_path = os.path.join(result_dir, f'crawled_{datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")}.csv')
+        self.temp_file_path = os.path.join(result_dir, 'crawled_temp.csv')
         self.fieldnames = [
             're_id', 'region_id', 'price', 'rent_price', 
-            'category', 'pyeongsu', 'house_name', 
-            'spec_address', 'type'
+            'category', 'house_name', 'type'
         ]
 
     def crawl_prop_list(self, dong, writer):
@@ -84,21 +83,18 @@ class PropertyCrawler:
     def _write_data(self, body_data, writer):
         for item in body_data:
             time.sleep(0.5)
-            # FIXME: 여기도 데이터 변경 적용
             writer.writerow({
                 're_id': item.get('atclNo'),
-                'region_id': item.get('cortarNo'),
+                'region_id': item.get('cortarNo')[:5],
                 'price': item.get('prc'),
                 'rent_price': item.get('rentPrc'),
                 'category': item.get('tradTpNm'),
-                'pyeongsu': item.get('spc1'),
                 'house_name': item.get('atclNm'),
-                'spec_address': '',
                 'type': item.get('rletTpNm'),
             })
 
     def start_crawling(self):
-        with open(self.csv_file_path, mode='w', newline='', encoding='utf-8') as csv_file:
+        with open(self.temp_file_path, mode='w', newline='', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, fieldnames=self.fieldnames)
             writer.writeheader()
 
@@ -106,6 +102,10 @@ class PropertyCrawler:
                 if filename.endswith('00000.json'):
                     file_path = os.path.join(self.folder_path, filename)
                     self._process_json_file(file_path, writer)
+
+        # 크롤링 성공 후 임시 파일을 최종 파일로 변경
+        os.rename(self.temp_file_path, self.csv_file_path)
+        print(f'Data has been written to {self.csv_file_path}.')
 
     def _process_json_file(self, file_path, writer):
         with open(file_path, 'r', encoding='utf-8') as json_file:
@@ -123,11 +123,9 @@ class PropertyCrawler:
 
 
 if __name__ == "__main__":
-    today = datetime.datetime.today().strftime('%Y-%m-%d')
-    csv_file_path = f'property_data/crawled_{today}.csv'
-    print(csv_file_path)
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # 현재 파일의 절대 경로 # crawl/prop_crawler
+    json_dir = os.path.join(base_dir, 'region_json')
+    result_dir = os.path.join(base_dir, 'property_data')
 
-    folder_path = './region_json'
-    crawler = PropertyCrawler(folder_path, csv_file_path)
+    crawler = PropertyCrawler(json_dir, result_dir)
     crawler.start_crawling()
-    print(f'Data with atclNo and cortarNo has been written to {csv_file_path}.')
