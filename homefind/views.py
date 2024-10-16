@@ -15,8 +15,8 @@ def index(request):
     for region in regions:
         districtData1[region.region_name] = {'sales': [0] * 3, 'rent': [0] * 3, 'monthly': [0] * 3}
         districtData2[region.region_name] = {'villa': [0] * 3, 'officetel': [0] * 3, 'oneroom': [0] * 3}
-        donutDistrictData1[region.region_name] = []
-        donutDistrictData2[region.region_name] = []
+        donutDistrictData1[region.region_name] = [0] * 3
+        donutDistrictData2[region.region_name] = [0] * 3
     
     realests = RealEstate.objects.all()
 
@@ -29,7 +29,7 @@ def index(request):
         translation = {'매매': 'sales', '전세': 'rent', '월세': 'monthly'}
         orders = {'빌라': 0, '오피스텔': 1, '원룸': 2}
         for counting in gu_reals.values('category', 'type').annotate(count=Count('id')):
-            districtData1[translation[counting['category']]][orders[counting['type']]] = counting['count']
+            districtData1[gu][translation[counting['category']]][orders[counting['type']]] = counting['count']
     
     # 2. districtData2 완성
     for r in regions:
@@ -40,7 +40,7 @@ def index(request):
         translation = {'빌라': 'villa', '오피스텔': 'officetel', '원룸': 'oneroom'}
         orders = {'매매': 0, '전세': 1, '월세': 2}
         for counting in gu_reals.values('type', 'category').annotate(count=Count('id')):
-            districtData1[translation[counting['type']]][orders[counting['category']]] = counting['count']
+            districtData2[gu][translation[counting['type']]][orders[counting['category']]] = counting['count']
 
     # 3. donutDistrictData1 완성
     for r in regions:
@@ -50,7 +50,7 @@ def index(request):
         # 카테고리(매매,전세,월세)으로 groupby 후 count
         orders = {'월세': 0, '전세': 1, '매매': 2}
         for counting in gu_reals.values('category').annotate(count=Count('id')):
-            districtData1[orders[counting['category']]] = counting['count']
+            donutDistrictData1[gu][orders[counting['category']]] = counting['count']
 
     # 4. donutDistrictData2 완성
     for r in regions:
@@ -60,7 +60,7 @@ def index(request):
         # type(빌라, 오피스텔, 원룸)으로 groupby 후 count
         orders = {'빌라': 0, '오피스텔': 1, '원룸': 2}
         for counting in gu_reals.values('type').annotate(count=Count('id')):
-            districtData1[orders[counting['category']]] = counting['count']
+            donutDistrictData2[gu][orders[counting['type']]] = counting['count']
 
     context = {
         "districtData1": districtData1,
