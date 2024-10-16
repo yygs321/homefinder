@@ -1,20 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from datetime import datetime
 from django.contrib.auth.decorators import login_required
-
-from django.http import HttpResponse
 from django.views.generic import DetailView, CreateView
 from django.urls import reverse_lazy
-from .models import Post
 from .models import *
-
-from django.views.generic import DetailView
-from .models import Post
-
 # 회원가입 기능
 def sign_up_view(request):
     if request.method == 'GET':
@@ -23,7 +16,6 @@ def sign_up_view(request):
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
         password2 = request.POST.get('password2', None)
-        nickname = request.POST.get('nickname', None)
 
         if password != password2:
             return render(request, 'user/signup.html')
@@ -35,16 +27,17 @@ def sign_up_view(request):
                 new_user = UserModel()
                 new_user.username = username
                 new_user.password = password
-                new_user.nickname = nickname
+                new_user.nickname = username
+                new_user.created_date = datetime.datetime.now()
                 new_user.save()
-                return redirect('/sign-up')
+                return redirect(request, '/gangnam')
             
 # 로그인 기능
 def sign_in_view(request):
     if request.method == 'POST':
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
-
+        
         try:
             me = UserModel.objects.get(username=username)
             if me.password == password:
@@ -71,22 +64,6 @@ def detail(request, board_id):
     context = {'board': board}
     return render(request, 'community/detail.html', context)
 
-# 게시글 생성
-@login_required # 로그인한 사용자만 가능
-def create_board_view(request):
-    if request.method == 'GET':
-        return render(request, 'community/create_board.html')
-    elif request.method == 'POST':
-        title = request.POST.get('title')
-        contents = request.POST.get('contents')
-        region_id = request.POST.get('region_id')
-        username = request.user  # 현재 로그인한 사용자
-
-        # 새로운 게시글 생성
-        new_board = BoardModel(title=title, contents=contents, region_id=region_id, username=username)
-        new_board.save()
-        return redirect('index')
-
 # 메인페이지
 def index(request):
     return render(request, 'community/index.html')  # index.html 템플릿을 렌더링
@@ -97,17 +74,17 @@ def board_list_view(request):
     context = {'boards': boards}
     return render(request, 'community/board_list.html', context)  # board_list.html 템플릿 렌더링
 
-
-
 def gangnam_view(request):
-    return render(request, 'gangnam.html')
+    posts = Post.objects.filter(region_id='강남')
+    return render(request, 'gangnam.html', {'posts': posts})
 
 def seocho_view(request):
-    return render(request, 'seocho.html')
+    posts = Post.objects.filter(region_id='서초')
+    return render(request, 'seocho.html', {'posts': posts})
 
 def songpa_view(request):
-    return render(request, 'songpa.html')
-
+    posts = Post.objects.filter(region_id='송파')
+    return render(request, 'songpa.html', {'posts': posts})
 
 class PostDetailView(DetailView):
     model = Post
@@ -118,16 +95,17 @@ class PostDetailView(DetailView):
         board_id = self.kwargs.get('board_id')
         return self.model.objects.get(board_id=board_id)  # post_id를 사용하여 객체 가져오기
 
-
 #@login_required  # 로그인한 사용자만 글 작성 가능
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_create.html'
     context_object_name = 'post'
     fields = ['region_id', 'title', 'content']  # 폼에 포함될 필드들
-    success_url = reverse_lazy('post_list')  # 성공 시 리다이렉트할 URL
 
     def form_valid(self, form):
         # 현재 로그인한 사용자 추가
         form.instance.user_id = self.request.user
         return super().form_valid(form)
+    
+    success_url = '/community/gangnam/'
+
