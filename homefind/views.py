@@ -2,7 +2,7 @@ from django.db.models import Count
 from .models import *
 from .serializers import *
 from django.shortcuts import render
-
+from django.db.models import Avg
 
 def index(request):
     districtData1 = {}  # 매매, 전세, 월세를 선택하면 빌라 - 오피스텔 - 원룸 순서로 매물량 막대그래프
@@ -72,9 +72,46 @@ def index(request):
     return render(request, "index.html", context=context)
 
 def map(request):
-    pass
-    return render(request, "map.html")
+    # Initialize an empty dictionary to store the data
+    region_data = {}
 
+    # Mapping building_type values to dictionary keys
+    building_type_map = {
+        '빌라': 'villa',
+        '오피스텔': 'officetel',
+        '원룸': 'oneroom'
+    }
+
+    # Get all regions
+    regions = Region.objects.all()
+
+    # Iterate over each region
+    for region in regions:
+        # Initialize the structure for each region
+        region_data[region.region_name] = {
+            'villa': {'매매': 0, '전세': 0, '월세': 0},
+            'officetel': {'매매': 0, '전세': 0, '월세': 0},
+            'oneroom': {'매매': 0, '전세': 0, '월세': 0}
+        }
+
+        # Query the average prices for each type and category in this region
+        for building_type, mapped_type in building_type_map.items():
+            for category in ['매매', '전세', '월세']:
+                avg_price = RealEstate.objects.filter(
+                    region=region,
+                    type=building_type,
+                    category=category
+                ).aggregate(Avg('price'))['price__avg']
+
+                if avg_price is not None:
+                    # Apply rounding to the average price
+                    region_data[region.region_name][mapped_type][category] = round(avg_price, 2)
+
+    # Pass the data to the template
+    context = {
+        'region_data': region_data
+    }
+    return render(request, "map.html", context)
 
 
 

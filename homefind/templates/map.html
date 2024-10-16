@@ -100,57 +100,176 @@
 
         // 각 구의 가격 정보 (빌라, 오피스텔, 원룸)
         var districtData = {
-           "Gangnam": {
-                villa: { 매매: 1500000, 전세: 800000, 월세: 300000 },
-                officetel: { 매매: 2000000, 전세: 900000, 월세: 350000 },
-                oneroom: { 매매: 1000000, 전세: 500000, 월세: 200000 }
+            "Gangnam": {
+                villa: {
+                    매매: {{ region_data.강남구.villa.매매 }},
+                    전세: {{ region_data.강남구.villa.전세 }},
+                    월세: {{ region_data.강남구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.강남구.officetel.매매 }},
+                    전세: {{ region_data.강남구.officetel.전세 }},
+                    월세: {{ region_data.강남구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.강남구.oneroom.매매 }},
+                    전세: {{ region_data.강남구.oneroom.전세 }},
+                    월세: {{ region_data.강남구.oneroom.월세 }}
+                }
             },
             "Gangsu": {
-                villa: { 매매: 1200000, 전세: 700000, 월세: 250000 },
-                officetel: { 매매: 1800000, 전세: 750000, 월세: 300000 },
-                oneroom: { 매매: 900000, 전세: 400000, 월세: 150000 }
+                villa: {
+                    매매: {{ region_data.강서구.villa.매매 }},
+                    전세: {{ region_data.강서구.villa.전세 }},
+                    월세: {{ region_data.강서구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.강서구.officetel.매매 }},
+                    전세: {{ region_data.강서구.officetel.전세 }},
+                    월세: {{ region_data.강서구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.강서구.oneroom.매매 }},
+                    전세: {{ region_data.강서구.oneroom.전세 }},
+                    월세: {{ region_data.강서구.oneroom.월세 }}
+                }
             },
             "Gwangjin": {
-                villa: { 매매: 1300000, 전세: 720000, 월세: 260000 },
-                officetel: { 매매: 1900000, 전세: 850000, 월세: 320000 },
-                oneroom: { 매매: 950000, 전세: 450000, 월세: 180000 }
+                villa: {
+                    매매: {{ region_data.광진구.villa.매매 }},
+                    전세: {{ region_data.광진구.villa.전세 }},
+                    월세: {{ region_data.광진구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.광진구.officetel.매매 }},
+                    전세: {{ region_data.광진구.officetel.전세 }},
+                    월세: {{ region_data.광진구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.광진구.oneroom.매매 }},
+                    전세: {{ region_data.광진구.oneroom.전세 }},
+                    월세: {{ region_data.광진구.oneroom.월세 }}
+                }
             },
             "Nowon": {
-                villa: { 매매: 1100000, 전세: 680000, 월세: 240000 },
-                officetel: { 매매: 1700000, 전세: 800000, 월세: 290000 },
-                oneroom: { 매매: 850000, 전세: 380000, 월세: 160000 }
+                villa: {
+                    매매: {{ region_data.노원구.villa.매매 }},
+                    전세: {{ region_data.노원구.villa.전세 }},
+                    월세: {{ region_data.노원구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.노원구.officetel.매매 }},
+                    전세: {{ region_data.노원구.officetel.전세 }},
+                    월세: {{ region_data.노원구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.노원구.oneroom.매매 }},
+                    전세: {{ region_data.노원구.oneroom.전세 }},
+                    월세: {{ region_data.노원구.oneroom.월세 }}
+                }
             },
             "Dongdaemun": {
-                villa: { 매매: 1400000, 전세: 750000, 월세: 270000 },
-                officetel: { 매매: 1950000, 전세: 880000, 월세: 330000 },
-                oneroom: { 매매: 980000, 전세: 420000, 월세: 170000 }
+                villa: {
+                    매매: {{ region_data.동대문구.villa.매매 }},
+                    전세: {{ region_data.동대문구.villa.전세 }},
+                    월세: {{ region_data.동대문구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.동대문구.officetel.매매 }},
+                    전세: {{ region_data.동대문구.officetel.전세 }},
+                    월세: {{ region_data.동대문구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.동대문구.oneroom.매매 }},
+                    전세: {{ region_data.동대문구.oneroom.전세 }},
+                    월세: {{ region_data.동대문구.oneroom.월세 }}
+                }
             },
             "Seongbuk": {
-                villa: { 매매: 1350000, 전세: 730000, 월세: 265000 },
-                officetel: { 매매: 1850000, 전세: 840000, 월세: 310000 },
-                oneroom: { 매매: 920000, 전세: 430000, 월세: 175000 }
+                villa: {
+                    매매: {{ region_data.성북구.villa.매매 }},
+                    전세: {{ region_data.성북구.villa.전세 }},
+                    월세: {{ region_data.성북구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.성북구.officetel.매매 }},
+                    전세: {{ region_data.성북구.officetel.전세 }},
+                    월세: {{ region_data.성북구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.성북구.oneroom.매매 }},
+                    전세: {{ region_data.성북구.oneroom.전세 }},
+                    월세: {{ region_data.성북구.oneroom.월세 }}
+                }
             },
             "Seongdong": {
-                villa: { 매매: 1250000, 전세: 700000, 월세: 255000 },
-                officetel: { 매매: 1750000, 전세: 780000, 월세: 280000 },
-                oneroom: { 매매: 880000, 전세: 390000, 월세: 155000 }
+                villa: {
+                    매매: {{ region_data.성동구.villa.매매 }},
+                    전세: {{ region_data.성동구.villa.전세 }},
+                    월세: {{ region_data.성동구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.성동구.officetel.매매 }},
+                    전세: {{ region_data.성동구.officetel.전세 }},
+                    월세: {{ region_data.성동구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.성동구.oneroom.매매 }},
+                    전세: {{ region_data.성동구.oneroom.전세 }},
+                    월세: {{ region_data.성동구.oneroom.월세 }}
+                }
             },
             "Songpa": {
-                villa: { 매매: 1600000, 전세: 770000, 월세: 275000 },
-                officetel: { 매매: 2100000, 전세: 950000, 월세: 360000 },
-                oneroom: { 매매: 1100000, 전세: 500000, 월세: 220000 }
+                villa: {
+                    매매: {{ region_data.송파구.villa.매매 }},
+                    전세: {{ region_data.송파구.villa.전세 }},
+                    월세: {{ region_data.송파구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.송파구.officetel.매매 }},
+                    전세: {{ region_data.송파구.officetel.전세 }},
+                    월세: {{ region_data.송파구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.송파구.oneroom.매매 }},
+                    전세: {{ region_data.송파구.oneroom.전세 }},
+                    월세: {{ region_data.송파구.oneroom.월세}}
+                }
             },
             "Yongsan": {
-                villa: { 매매: 1450000, 전세: 760000, 월세: 280000 },
-                officetel: { 매매: 2000000, 전세: 900000, 월세: 340000 },
-                oneroom: { 매매: 1020000, 전세: 520000, 월세: 210000 }
+                villa: {
+                    매매: {{ region_data.용산구.villa.매매 }},
+                    전세: {{ region_data.용산구.villa.전세 }},
+                    월세: {{ region_data.용산구.villa.월세 }}
+                },
+                officetel: {
+                    매매: {{ region_data.용산구.officetel.매매 }},
+                    전세: {{ region_data.용산구.officetel.전세 }},
+                    월세: {{ region_data.용산구.officetel.월세 }}
+                },
+                oneroom: {
+                    매매: {{ region_data.용산구.oneroom.매매 }},
+                    전세: {{ region_data.용산구.oneroom.전세 }},
+                    월세: {{ region_data.용산구.oneroom.월세 }}
+                }
             },
-            "Jongno": {
-                villa: { 매매: 1550000, 전세: 820000, 월세: 290000 },
-                officetel: { 매매: 2050000, 전세: 920000, 월세: 370000 },
-                oneroom: { 매매: 1050000, 전세: 550000, 월세: 230000 }
-            }
-        };
+    "Jongno": {
+        villa: {
+            매매: {{ region_data.종로구.villa.매매 }},
+            전세: {{ region_data.종로구.villa.전세 }},
+            월세: {{ region_data.종로구.villa.월세 }}
+        },
+        officetel: {
+            매매: {{ region_data.종로구.officetel.매매 }},
+            전세: {{ region_data.종로구.officetel.전세 }},
+            월세: {{ region_data.종로구.officetel.월세 }}
+        },
+        oneroom: {
+            매매: {{ region_data.종로구.oneroom.매매 }},
+            전세: {{ region_data.종로구.oneroom.전세 }},
+            월세: {{ region_data.종로구.oneroom.월세 }}
+        }
+    }};
 
         var currentMarker = null;  // 현재 표시된 마커
         var infoWindow = new naver.maps.InfoWindow();  // 정보창 생성
@@ -196,9 +315,9 @@
                 var infoContent = `
                     <div style="padding:10px;">
                         <h5>${district} (${selectedType})</h5>
-                        <p><strong>매매:</strong> ${data.매매}원</p>
-                        <p><strong>전세:</strong> ${data.전세}원</p>
-                        <p><strong>월세:</strong> ${data.월세}원</p>
+                        <p><strong>매매:</strong> ${data.매매 === 0 ? '없음' : data.매매 + '원'}</p>
+                        <p><strong>전세:</strong> ${data.전세 === 0 ? '없음' : data.전세 + '원'}</p>
+                        <p><strong>월세:</strong> ${data.월세 === 0 ? '없음' : data.월세 + '원'}</p>
                     </div>`;
 
                 // 기존 마커 제거
