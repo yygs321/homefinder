@@ -1,0 +1,188 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1168000000",
+                "CortarNm": "강남구",
+                "MapXCrdn": "127.047313",
+                "MapYCrdn": "37.517408",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1174000000",
+                "CortarNm": "강동구",
+                "MapXCrdn": "127.123771",
+                "MapYCrdn": "37.530126",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1130500000",
+                "CortarNm": "강북구",
+                "MapXCrdn": "127.025488",
+                "MapYCrdn": "37.63974",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1150000000",
+                "CortarNm": "강서구",
+                "MapXCrdn": "126.849534",
+                "MapYCrdn": "37.550985",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1162000000",
+                "CortarNm": "관악구",
+                "MapXCrdn": "126.951601",
+                "MapYCrdn": "37.481021",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1121500000",
+                "CortarNm": "광진구",
+                "MapXCrdn": "127.082375",
+                "MapYCrdn": "37.538617",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1153000000",
+                "CortarNm": "구로구",
+                "MapXCrdn": "126.887532",
+                "MapYCrdn": "37.49551",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1154500000",
+                "CortarNm": "금천구",
+                "MapXCrdn": "126.902075",
+                "MapYCrdn": "37.45196",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1135000000",
+                "CortarNm": "노원구",
+                "MapXCrdn": "127.056411",
+                "MapYCrdn": "37.654286",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1132000000",
+                "CortarNm": "도봉구",
+                "MapXCrdn": "127.047163",
+                "MapYCrdn": "37.668768",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1123000000",
+                "CortarNm": "동대문구",
+                "MapXCrdn": "127.039765",
+                "MapYCrdn": "37.574493",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1159000000",
+                "CortarNm": "동작구",
+                "MapXCrdn": "126.9395",
+                "MapYCrdn": "37.51245",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1144000000",
+                "CortarNm": "마포구",
+                "MapXCrdn": "126.9084",
+                "MapYCrdn": "37.563517",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1141000000",
+                "CortarNm": "서대문구",
+                "MapXCrdn": "126.9368",
+                "MapYCrdn": "37.579225",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1165000000",
+                "CortarNm": "서초구",
+                "MapXCrdn": "127.032594",
+                "MapYCrdn": "37.483564",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1120000000",
+                "CortarNm": "성동구",
+                "MapXCrdn": "127.036838",
+                "MapYCrdn": "37.563475",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1129000000",
+                "CortarNm": "성북구",
+                "MapXCrdn": "127.020729",
+                "MapYCrdn": "37.5874",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1171000000",
+                "CortarNm": "송파구",
+                "MapXCrdn": "127.105863",
+                "MapYCrdn": "37.514592",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1147000000",
+                "CortarNm": "양천구",
+                "MapXCrdn": "126.866546",
+                "MapYCrdn": "37.517007",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1156000000",
+                "CortarNm": "영등포구",
+                "MapXCrdn": "126.896213",
+                "MapYCrdn": "37.526367",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1117000000",
+                "CortarNm": "용산구",
+                "MapXCrdn": "126.96535",
+                "MapYCrdn": "37.538825",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1138000000",
+                "CortarNm": "은평구",
+                "MapXCrdn": "126.929163",
+                "MapYCrdn": "37.60278",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1111000000",
+                "CortarNm": "종로구",
+                "MapXCrdn": "126.979638",
+                "MapYCrdn": "37.573025",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1114000000",
+                "CortarNm": "중구",
+                "MapXCrdn": "126.9976",
+                "MapYCrdn": "37.563842",
+                "CortarType": "dvsn"
+            },
+            {
+                "CortarNo": "1126000000",
+                "CortarNm": "중랑구",
+                "MapXCrdn": "127.092584",
+                "MapYCrdn": "37.606324",
+                "CortarType": "dvsn"
+            }
+        ],
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

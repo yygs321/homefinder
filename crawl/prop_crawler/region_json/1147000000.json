@@ -1,0 +1,41 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1147010200",
+                "CortarNm": "목동",
+                "MapXCrdn": "126.8759",
+                "MapYCrdn": "37.5366",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1147010300",
+                "CortarNm": "신월동",
+                "MapXCrdn": "126.8342",
+                "MapYCrdn": "37.527925",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1147010100",
+                "CortarNm": "신정동",
+                "MapXCrdn": "126.8632",
+                "MapYCrdn": "37.516433",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1147000000",
+            "CortarNm": "양천구",
+            "MapXCrdn": "126.866546",
+            "MapYCrdn": "37.517007",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

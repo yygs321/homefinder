@@ -1,0 +1,293 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1129013400",
+                "CortarNm": "길음동",
+                "MapXCrdn": "127.0228",
+                "MapYCrdn": "37.608332",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010300",
+                "CortarNm": "돈암동",
+                "MapXCrdn": "127.0207",
+                "MapYCrdn": "37.5974",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011600",
+                "CortarNm": "동선동1가",
+                "MapXCrdn": "127.0184",
+                "MapYCrdn": "37.592307",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011700",
+                "CortarNm": "동선동2가",
+                "MapXCrdn": "127.019538",
+                "MapYCrdn": "37.590249",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011800",
+                "CortarNm": "동선동3가",
+                "MapXCrdn": "127.020538",
+                "MapYCrdn": "37.593899",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011900",
+                "CortarNm": "동선동4가",
+                "MapXCrdn": "127.018781",
+                "MapYCrdn": "37.595109",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012000",
+                "CortarNm": "동선동5가",
+                "MapXCrdn": "127.0166",
+                "MapYCrdn": "37.5962",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010400",
+                "CortarNm": "동소문동1가",
+                "MapXCrdn": "127.007163",
+                "MapYCrdn": "37.590199",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010500",
+                "CortarNm": "동소문동2가",
+                "MapXCrdn": "127.00808",
+                "MapYCrdn": "37.588794",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010600",
+                "CortarNm": "동소문동3가",
+                "MapXCrdn": "127.011567",
+                "MapYCrdn": "37.590371",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010700",
+                "CortarNm": "동소문동4가",
+                "MapXCrdn": "127.010553",
+                "MapYCrdn": "37.591846",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010800",
+                "CortarNm": "동소문동5가",
+                "MapXCrdn": "127.015017",
+                "MapYCrdn": "37.59149",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010900",
+                "CortarNm": "동소문동6가",
+                "MapXCrdn": "127.014213",
+                "MapYCrdn": "37.59359",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011000",
+                "CortarNm": "동소문동7가",
+                "MapXCrdn": "127.0142",
+                "MapYCrdn": "37.5964",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013000",
+                "CortarNm": "보문동1가",
+                "MapXCrdn": "127.019558",
+                "MapYCrdn": "37.586477",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013100",
+                "CortarNm": "보문동2가",
+                "MapXCrdn": "127.018186",
+                "MapYCrdn": "37.585828",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013200",
+                "CortarNm": "보문동3가",
+                "MapXCrdn": "127.015813",
+                "MapYCrdn": "37.583874",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012600",
+                "CortarNm": "보문동4가",
+                "MapXCrdn": "127.021332",
+                "MapYCrdn": "37.582882",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012700",
+                "CortarNm": "보문동5가",
+                "MapXCrdn": "127.020107",
+                "MapYCrdn": "37.582588",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012800",
+                "CortarNm": "보문동6가",
+                "MapXCrdn": "127.018825",
+                "MapYCrdn": "37.580475",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012900",
+                "CortarNm": "보문동7가",
+                "MapXCrdn": "127.022225",
+                "MapYCrdn": "37.579733",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011100",
+                "CortarNm": "삼선동1가",
+                "MapXCrdn": "127.0082",
+                "MapYCrdn": "37.5845",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011200",
+                "CortarNm": "삼선동2가",
+                "MapXCrdn": "127.0114",
+                "MapYCrdn": "37.584",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011300",
+                "CortarNm": "삼선동3가",
+                "MapXCrdn": "127.013",
+                "MapYCrdn": "37.586557",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011400",
+                "CortarNm": "삼선동4가",
+                "MapXCrdn": "127.013302",
+                "MapYCrdn": "37.589797",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129011500",
+                "CortarNm": "삼선동5가",
+                "MapXCrdn": "127.0158",
+                "MapYCrdn": "37.5885",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013700",
+                "CortarNm": "상월곡동",
+                "MapXCrdn": "127.048125",
+                "MapYCrdn": "37.605757",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013900",
+                "CortarNm": "석관동",
+                "MapXCrdn": "127.0611",
+                "MapYCrdn": "37.608",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010100",
+                "CortarNm": "성북동",
+                "MapXCrdn": "126.9922",
+                "MapYCrdn": "37.5969",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129010200",
+                "CortarNm": "성북동1가",
+                "MapXCrdn": "127.0038",
+                "MapYCrdn": "37.5894",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012100",
+                "CortarNm": "안암동1가",
+                "MapXCrdn": "127.022239",
+                "MapYCrdn": "37.588695",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012200",
+                "CortarNm": "안암동2가",
+                "MapXCrdn": "127.023",
+                "MapYCrdn": "37.586732",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012300",
+                "CortarNm": "안암동3가",
+                "MapXCrdn": "127.0231",
+                "MapYCrdn": "37.583882",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012400",
+                "CortarNm": "안암동4가",
+                "MapXCrdn": "127.024663",
+                "MapYCrdn": "37.580392",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129012500",
+                "CortarNm": "안암동5가",
+                "MapXCrdn": "127.03005",
+                "MapYCrdn": "37.588815",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013800",
+                "CortarNm": "장위동",
+                "MapXCrdn": "127.0501",
+                "MapYCrdn": "37.6157",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013300",
+                "CortarNm": "정릉동",
+                "MapXCrdn": "126.9974",
+                "MapYCrdn": "37.6169",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013500",
+                "CortarNm": "종암동",
+                "MapXCrdn": "127.0333",
+                "MapYCrdn": "37.5966",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1129013600",
+                "CortarNm": "하월곡동",
+                "MapXCrdn": "127.0387",
+                "MapYCrdn": "37.604407",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1129000000",
+            "CortarNm": "성북구",
+            "MapXCrdn": "127.020729",
+            "MapYCrdn": "37.5874",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

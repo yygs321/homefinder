@@ -1,0 +1,69 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1121510400",
+                "CortarNm": "광장동",
+                "MapXCrdn": "127.103025",
+                "MapYCrdn": "37.546892",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510300",
+                "CortarNm": "구의동",
+                "MapXCrdn": "127.088337",
+                "MapYCrdn": "37.543983",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510900",
+                "CortarNm": "군자동",
+                "MapXCrdn": "127.075837",
+                "MapYCrdn": "37.555122",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510200",
+                "CortarNm": "능동",
+                "MapXCrdn": "127.080499",
+                "MapYCrdn": "37.55378",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510500",
+                "CortarNm": "자양동",
+                "MapXCrdn": "127.076006",
+                "MapYCrdn": "37.533214",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510100",
+                "CortarNm": "중곡동",
+                "MapXCrdn": "127.0876",
+                "MapYCrdn": "37.5631",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1121510700",
+                "CortarNm": "화양동",
+                "MapXCrdn": "127.0713",
+                "MapYCrdn": "37.5465",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1121500000",
+            "CortarNm": "광진구",
+            "MapXCrdn": "127.082375",
+            "MapYCrdn": "37.538617",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

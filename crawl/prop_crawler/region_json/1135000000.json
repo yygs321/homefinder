@@ -1,0 +1,55 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1135010300",
+                "CortarNm": "공릉동",
+                "MapXCrdn": "127.0877",
+                "MapYCrdn": "37.6306",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1135010500",
+                "CortarNm": "상계동",
+                "MapXCrdn": "127.0724",
+                "MapYCrdn": "37.6669",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1135010200",
+                "CortarNm": "월계동",
+                "MapXCrdn": "127.054275",
+                "MapYCrdn": "37.629374",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1135010600",
+                "CortarNm": "중계동",
+                "MapXCrdn": "127.0811",
+                "MapYCrdn": "37.650874",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1135010400",
+                "CortarNm": "하계동",
+                "MapXCrdn": "127.073575",
+                "MapYCrdn": "37.638249",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1135000000",
+            "CortarNm": "노원구",
+            "MapXCrdn": "127.056411",
+            "MapYCrdn": "37.654286",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

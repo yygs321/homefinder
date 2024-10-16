@@ -1,0 +1,90 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1153010300",
+                "CortarNm": "가리봉동",
+                "MapXCrdn": "126.887738",
+                "MapYCrdn": "37.483351",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010700",
+                "CortarNm": "개봉동",
+                "MapXCrdn": "126.856813",
+                "MapYCrdn": "37.494393",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010600",
+                "CortarNm": "고척동",
+                "MapXCrdn": "126.8598",
+                "MapYCrdn": "37.5024",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010200",
+                "CortarNm": "구로동",
+                "MapXCrdn": "126.8823",
+                "MapYCrdn": "37.4937",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010900",
+                "CortarNm": "궁동",
+                "MapXCrdn": "126.8277",
+                "MapYCrdn": "37.5009",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010100",
+                "CortarNm": "신도림동",
+                "MapXCrdn": "126.880583",
+                "MapYCrdn": "37.507766",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153010800",
+                "CortarNm": "오류동",
+                "MapXCrdn": "126.838375",
+                "MapYCrdn": "37.492143",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153011000",
+                "CortarNm": "온수동",
+                "MapXCrdn": "126.8207",
+                "MapYCrdn": "37.4938",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153011100",
+                "CortarNm": "천왕동",
+                "MapXCrdn": "126.8391",
+                "MapYCrdn": "37.4802",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1153011200",
+                "CortarNm": "항동",
+                "MapXCrdn": "126.8258",
+                "MapYCrdn": "37.481",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1153000000",
+            "CortarNm": "구로구",
+            "MapXCrdn": "126.887532",
+            "MapYCrdn": "37.49551",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}
