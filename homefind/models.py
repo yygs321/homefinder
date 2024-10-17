@@ -53,3 +53,14 @@ class RealEstate(models.Model):
 
     def __str__(self):
         return self.region.region_name + '/' + self.house_name + '/' + self.type + '/' + self.category + '/' + '가격: ' + str(self.price)
+
+# 뉴스 토픽 빈도수 모델
+class NewsFrequency(models.Model):
+    category = models.CharField(max_length=20)
+    value = models.CharField(max_length=20)
+    count = models.IntegerField()
+    date = models.DateField()
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name='Created Date')  # 생성일
+
+    def __str__(self):
+        return f"{self.category} - {self.value} on {self.date}"

@@ -4,6 +4,7 @@ from .serializers import *
 from django.shortcuts import render
 from django.db.models import Avg
 
+
 def index(request):
     districtData1 = {}  # 매매, 전세, 월세를 선택하면 빌라 - 오피스텔 - 원룸 순서로 매물량 막대그래프
     districtData2 = {}  # 빌 - 오 - 원 선택하면 매매 - 전세 - 월세 순서로 매물량 막대 그래프
@@ -17,7 +18,7 @@ def index(request):
         districtData2[region.region_name] = {'villa': [0] * 3, 'officetel': [0] * 3, 'oneroom': [0] * 3}
         donutDistrictData1[region.region_name] = [0] * 3
         donutDistrictData2[region.region_name] = [0] * 3
-    
+
     realests = RealEstate.objects.all()
 
     # 1. districtData1 완성
@@ -30,7 +31,7 @@ def index(request):
         orders = {'빌라': 0, '오피스텔': 1, '원룸': 2}
         for counting in gu_reals.values('category', 'type').annotate(count=Count('id')):
             districtData1[gu][translation[counting['category']]][orders[counting['type']]] = counting['count']
-    
+
     # 2. districtData2 완성
     for r in regions:
         gu = r.region_name
@@ -89,28 +90,52 @@ def map(request):
     for region in regions:
         # Initialize the structure for each region
         region_data[region.region_name] = {
-            'villa': {'매매': 0, '전세': 0, '월세': 0},
-            'officetel': {'매매': 0, '전세': 0, '월세': 0},
-            'oneroom': {'매매': 0, '전세': 0, '월세': 0}
+            'villa': {'매매': 0, '전세': 0, '월세': {'보증금': 0, '월세': 0}},
+            'officetel': {'매매': 0, '전세': 0, '월세': {'보증금': 0, '월세': 0}},
+            'oneroom': {'매매': 0, '전세': 0, '월세': {'보증금': 0, '월세': 0}}
         }
 
         # Query the average prices for each type and category in this region
         for building_type, mapped_type in building_type_map.items():
             for category in ['매매', '전세', '월세']:
-                avg_price = RealEstate.objects.filter(
-                    region=region,
-                    type=building_type,
-                    category=category
-                ).aggregate(Avg('price'))['price__avg']
+                if category == '월세':
+                    # Query for rent_price and price for 월세 category
+                    avg_deposit = RealEstate.objects.filter(
+                        region=region,
+                        type=building_type,
+                        category=category
+                    ).aggregate(Avg('price'))['price__avg']
 
-                if avg_price is not None:
-                    # Apply rounding to the average price
-                    region_data[region.region_name][mapped_type][category] = round(avg_price, 2)
+                    avg_rent = RealEstate.objects.filter(
+                        region=region,
+                        type=building_type,
+                        category=category
+                    ).aggregate(Avg('rent_price'))['rent_price__avg']
+
+                    # If values are not None, store them, else keep 0
+                    if avg_deposit is not None:
+                        region_data[region.region_name][mapped_type]['월세']['보증금'] = round(avg_deposit, 2)
+
+                    if avg_rent is not None:
+                        region_data[region.region_name][mapped_type]['월세']['월세'] = round(avg_rent, 2)
+
+                else:
+                    # For 매매 and 전세, calculate price as usual
+                    avg_price = RealEstate.objects.filter(
+                        region=region,
+                        type=building_type,
+                        category=category
+                    ).aggregate(Avg('price'))['price__avg']
+
+                    if avg_price is not None:
+                        # Apply rounding to the average price
+                        region_data[region.region_name][mapped_type][category] = round(avg_price, 2)
 
     # Pass the data to the template
     context = {
         'region_data': region_data
     }
+
     return render(request, "map.html", context)
 
 
@@ -144,7 +169,6 @@ def home(request):
     context["regions"]=regions
     context["num_res"] = num_res
 
-    print(context["regions"])
     return render(request, "main.html", context=context)
 
 

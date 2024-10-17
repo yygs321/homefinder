@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(RealEstate)
 admin.site.register(Region)
+admin.site.register(NewsFrequency)
