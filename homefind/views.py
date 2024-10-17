@@ -114,6 +114,8 @@ def map(request):
     return render(request, "map.html", context)
 
 
+def home(request):
+    return render(request, "main.html")
 
 
 # 옛날 코드
