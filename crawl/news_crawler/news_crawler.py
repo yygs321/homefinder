@@ -2,8 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from frequency_counter import count_frequency
-from db_connector import *
+from crawl.news_crawler.db_connector import check_cache_and_update_if_needed, save_to_db, save_to_redis, get_cached_data
+from crawl.news_crawler.frequency_counter import count_frequency
+from datetime import datetime,timedelta
 
 # Chrome 드라이버 경로 설정
 chrome_service = Service(r'C:\Program Files\chromeDriver\chromedriver-win64\chromedriver.exe')
@@ -13,13 +14,37 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 
 driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
 
-today = datetime.today()
-six_months_ago = today - timedelta(days=180)
+districts = {
+    "강남구": "1168000000",
+    "강동구": "1174000000",
+    "강북구": "1130500000",
+    "강서구": "1150000000",
+    "관악구": "1162000000",
+    "광진구": "1121500000",
+    "구로구": "1153000000",
+    "금천구": "1154500000",
+    "노원구": "1135000000",
+    "도봉구": "1132000000",
+    "동대문구": "1123000000",
+    "동작구": "1159000000",
+    "마포구": "1144000000",
+    "서대문구": "1141000000",
+    "서초구": "1165000000",
+    "성동구": "1120000000",
+    "성북구": "1129000000",
+    "송파구": "1171000000",
+    "양천구": "1147000000",
+    "영등포구": "1156000000",
+    "용산구": "1117000000",
+    "은평구": "1138000000",
+    "종로구": "1111000000",
+    "중구": "1114000000",
+    "중랑구": "1126000000"
+}
 
-# 각 자치구별로 빈도수 리스트
-frequency_data = []
-
-def crawl_news(city_no, dvsn_no):
+def crawl_news(city_no, dvsn_no,frequency_data):
+    today = datetime.today()
+    six_months_ago = today - timedelta(days=180)
     page = 1
     base_url = f"https://m2.land.naver.com/news/region?cityNo={city_no}&dvsnNo={dvsn_no}"
 
@@ -55,47 +80,24 @@ def crawl_news(city_no, dvsn_no):
 
         page += 1
 
+    return
 
-# 자치구 코드를 사용한 크롤링 실행
-districts = {
-    "강남구": "1168000000",
-    "강동구": "1174000000",
-    "강북구": "1130500000",
-    "강서구": "1150000000",
-    "관악구": "1162000000",
-    "광진구": "1121500000",
-    "구로구": "1153000000",
-    "금천구": "1154500000",
-    "노원구": "1135000000",
-    "도봉구": "1132000000",
-    "동대문구": "1123000000",
-    "동작구": "1159000000",
-    "마포구": "1144000000",
-    "서대문구": "1141000000",
-    "서초구": "1165000000",
-    "성동구": "1120000000",
-    "성북구": "1129000000",
-    "송파구": "1171000000",
-    "양천구": "1147000000",
-    "영등포구": "1156000000",
-    "용산구": "1117000000",
-    "은평구": "1138000000",
-    "종로구": "1111000000",
-    "중구": "1114000000",
-    "중랑구": "1126000000"
-}
+def check_cache_and_collect_data():
+    frequency_data = []
 
+    # 캐시를 확인하고 크롤링이 필요한 경우에만 수행
+    if check_cache_and_update_if_needed():
+        for district, dvsn_no in districts.items():
+            print(f'{district} 크롤링 시작')
+            crawl_news("1100000000", dvsn_no, frequency_data)
+            print(f'{district} 크롤링 종료')
+            print("---------------------")
 
-if check_cache_and_update_if_needed(): #캐시가 없거나 기간이 지난 경우 크롤링
-    for district, dvsn_no in districts.items():
-        print(f"{district} 뉴스 크롤링 시작")
-        crawl_news("1100000000", dvsn_no)
-        print(f"{district} 뉴스 크롤링 완료")
-        print("------------------------")
+        # DB와 Redis에 저장
+        save_to_db(frequency_data)
+        save_to_redis(frequency_data)
 
-    # 크롤링이 완료된 후 DB와 Redis에 저장
-    save_to_db(frequency_data)
-    save_to_redis(frequency_data)
+    else:# 캐시에서 데이터를 가져오거나 크롤링 결과 사용
+        frequency_data = get_cached_data()
 
-frequency_result= get_cached_data()
-print(frequency_result)
+    return frequency_data
