@@ -112,25 +112,46 @@
             <div class="ranking-section">
                 <div class="page2-heading">빌라</div>
                 <ul class="ranking-list">
-                    <li>1. 서초구 <span>매매: 1억, 전세: 8천만, 월세: 50만</span></li>
-                    <li>2. 강남구 <span>매매: 1.2억, 전세: 9천만, 월세: 60만</span></li>
-                    <li>3. 광진구 <span>매매: 1.5억, 전세: 1억, 월세: 70만</span></li>
+                    {% load custom_filters %}
+                    {% for villa in villas %}
+                        {% with villa|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
                 </ul>
             </div>
             <div class="ranking-section">
                 <div class="page2-heading">오피스텔</div>
                 <ul class="ranking-list">
-                    <li>1. 서초구 <span>매매: 2억, 전세: 1.5억, 월세: 80만</span></li>
-                    <li>2. 강남구 <span>매매: 2.2억, 전세: 1.7억, 월세: 85만</span></li>
-                    <li>3. 광진구 <span>매매: 2.5억, 전세: 2억, 월세: 90만</span></li>
+                    {% load custom_filters %}
+                    {% for office in offices %}
+                        {% with office|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
                 </ul>
             </div>
             <div class="ranking-section">
                 <div class="page2-heading">원룸</div>
                 <ul class="ranking-list">
-                    <li>1. 서초구 <span>매매: 8천만, 전세: 5천만, 월세: 30만</span></li>
-                    <li>2. 강남구 <span>매매: 9천만, 전세: 6천만, 월세: 35만</span></li>
-                    <li>3. 광진구 <span>매매: 1억, 전세: 7천만, 월세: 40만</span></li>
+                    {% load custom_filters %}
+                    {% for one in ones %}
+                        {% with one|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -179,13 +200,20 @@
 
         // 막대 차트 생성
         const ctx = document.getElementById('myBarChart').getContext('2d');
+        const labels = {{ regions|safe }}
+        const data = {{ num_res|safe }}
+
+        // 테스트
+        console.log("Labels:", labels);
+        console.log("Data:", data);
+
         const myBarChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['강남구', '서초구', '송파구', '강동구', '마포구', '중구', '종로구', '동대문구', '강북구', '성북구', '노원구', '도봉구', '은평구', '서대문구', '양천구', '영등포구', '관악구', '동작구', '광진구', '구로구'],
+                labels: labels,
                 datasets: [{
                     label: '매물 수',
-                    data: [120, 150, 200, 130, 100, 90, 80, 110, 70, 60, 40, 50, 30, 45, 95, 85, 120, 110, 90, 100],
+                    data: data,
                     backgroundColor: '#36A2EB'
                 }]
             },
