@@ -2,17 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 from crawl.news_crawler.db_connector import check_cache_and_update_if_needed, save_to_db, save_to_redis, get_cached_data
 from crawl.news_crawler.frequency_counter import count_frequency
 from datetime import datetime,timedelta
 
-# Chrome 드라이버 경로 설정
-chrome_service = Service(r'C:\Program Files\chromeDriver\chromedriver-win64\chromedriver.exe')
+# Chrome 옵션 설정
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+# ChromeDriver 자동 설치 및 실행
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
+
 
 districts = {
     "강남구": "1168000000",
