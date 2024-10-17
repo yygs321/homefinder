@@ -115,8 +115,9 @@ def map(request):
 
 
 def home(request):
-    # 1. 첫번째 페이지 막대 그래프 위한 regions, num_res 배열 만들어 반환
-    regions = ['강남구', '서초구', '송파구', '강동구', '마포구', '중구', '종로구', '동대문구', '강북구', '성북구', '노원구', '도봉구', '은평구', '서대문구', '양천구', '영등포구', '관악구', '동작구', '광진구', '구로구']
+    # 첫 번째 페이지: 매물수 비교 막대 차트 위한 데이터 생성
+    regions = ['강남구', '서초구', '송파구', '강동구', '마포구', '중구', '종로구', '동대문구', '강북구', '성북구', '노원구', '도봉구', '은평구', '서대문구', '양천구',
+               '영등포구', '관악구', '동작구', '광진구', '구로구']
     num_res = [0] * len(regions)
 
     res = RealEstate.objects.all()
@@ -124,48 +125,37 @@ def home(request):
     for i in range(len(regions)):
         r = regions[i]
         num_res[i] = res.filter(region__region_name=r).count()
-    
-    context = {
-        'regions': regions,
-        'num_res': num_res,
-    }
 
-    # 2페이지 - 빌라, 오피스텔, 원룸 별 저렴한 건물 보여주기 위한 데이터 반환
-    villas = res.filter(type='빌라').order_by('price')[:3]
-    offices = res.filter(type='오피스텔').order_by('price')[:3]
-    ones = res.filter(type='원룸').order_by('price')[:3]
+    context=dict()
 
-    # 빌라 최저가 정보
-    context['villas'] = []
-    for i in range(len(villas)):
-        villa = villas[i]
-        result = str(i + 1) + '. ' + str(villa.region.region_name) + '/' 
-        if villa.category == '월세':
-            result += '월세: ' + str(int(villa.rent_price)) + '만'
-        else:
-            result += str(villa.category) + ': ' + str(int(villa.price)) + '만'
-        context['villas'].append(result)
-    
-    # 오피스텔 최저가 정보
-    context['offices'] = []
-    for i in range(len(offices)):
-        office = offices[i]
-        result = str(i + 1) + '. ' + str(office.region.region_name) + '/' 
-        if office.category == '월세':
-            result += '월세: ' + str(int(office.rent_price)) + '만'
-        else:
-            result += str(office.category) + ': ' + str(int(office.price)) + '만'
-        context['offices'].append(result)
-    
-    # 원룸 최저가 정보
-    context['ones'] = []
-    for i in range(len(ones)):
-        one = ones[i]
-        result = str(i + 1) + '. ' + str(one.region.region_name) + '/' 
-        if one.category == '월세':
-            result += '월세: ' + str(int(one.rent_price)) + '만'
-        else:
-            result += str(one.category) + ': ' + str(int(one.price)) + '만'        
-        context['ones'].append(result)
+    # 두 번째 페이지: 매매, 전세, 월세에 따른 최저가 정보 반환
+    context['villas_sale'] = get_top3_res('빌라', '매매')
+    context['villas_jeonse'] = get_top3_res('빌라', '전세')
+    context['villas_rent'] = get_top3_res('빌라', '월세')
 
+    context['offices_sale'] = get_top3_res('오피스텔', '매매')
+    context['offices_jeonse'] = get_top3_res('오피스텔', '전세')
+    context['offices_rent'] = get_top3_res('오피스텔', '월세')
+
+    context['ones_sale'] = get_top3_res('원룸', '매매')
+    context['ones_jeonse'] = get_top3_res('원룸', '전세')
+    context['ones_rent'] = get_top3_res('원룸', '월세')
+
+    context["regions"]=regions
+    context["num_res"] = num_res
+
+    print(context["regions"])
     return render(request, "main.html", context=context)
+
+
+def get_top3_res(building_type, transaction_type):
+    res = RealEstate.objects.filter(type=building_type, category=transaction_type).order_by('price')[:3]
+    result_list = []
+    for i, estate in enumerate(res):
+        result = f"{i + 1}. {estate.region.region_name} / "
+        if estate.category == '월세':
+            result += f"월세: {int(estate.rent_price)}만"
+        else:
+            result += f"{estate.category}: {int(estate.price)}만"
+        result_list.append(result)
+    return result_list

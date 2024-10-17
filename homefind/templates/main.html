@@ -68,10 +68,12 @@
         .wordcloud-image {
             display: block;
             margin: 0 auto;
-            max-width: 80%;
+            max-width: 100%;
+            height: auto;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
     </style>
 </head>
 <body>
@@ -102,16 +104,21 @@
 
         <!-- Page 1: 매물수 비교 막대 차트 -->
         <div id="page1" class="page-container active">
-            <div class="title">서울 구별 매물수 비교</div>
+            <div class="title">서울 구별 전체 매물수 비교</div>
             <canvas id="myBarChart"></canvas>
         </div>
 
         <!-- Page 2: 빌라, 오피스텔, 원룸 매매/전세/월세 상위 3개 순위 -->
         <div id="page2" class="page-container">
             <div class="title">저렴한 부동산 Top3</div>
+            <div class="btn-group toggle-buttons" role="group" aria-label="Toggle for transaction type">
+                <button type="button" class="btn btn-outline-primary" id="sale-btn">매매</button>
+                <button type="button" class="btn btn-outline-secondary" id="jeonse-btn">전세</button>
+                <button type="button" class="btn btn-outline-success" id="rent-btn">월세</button>
+            </div>
             <div class="ranking-section">
                 <div class="page2-heading">빌라</div>
-                <ul class="ranking-list">
+                <ul class="ranking-list villas">
                     {% load custom_filters %}
                     {% for villa in villas %}
                         {% with villa|split:"/" as parts %}
@@ -126,7 +133,7 @@
             </div>
             <div class="ranking-section">
                 <div class="page2-heading">오피스텔</div>
-                <ul class="ranking-list">
+                <ul class="ranking-list offices">
                     {% load custom_filters %}
                     {% for office in offices %}
                         {% with office|split:"/" as parts %}
@@ -141,7 +148,7 @@
             </div>
             <div class="ranking-section">
                 <div class="page2-heading">원룸</div>
-                <ul class="ranking-list">
+                <ul class="ranking-list ones">
                     {% load custom_filters %}
                     {% for one in ones %}
                         {% with one|split:"/" as parts %}
@@ -201,12 +208,8 @@
 
         // 막대 차트 생성
         const ctx = document.getElementById('myBarChart').getContext('2d');
-        const labels = {{ regions|safe }}
-        const data = {{ num_res|safe }}
-
-        // 테스트
-        console.log("Labels:", labels);
-        console.log("Data:", data);
+        const labels = {{ regions |safe }};
+        const data = {{ num_res }};
 
         const myBarChart = new Chart(ctx, {
             type: 'bar',
@@ -230,7 +233,51 @@
                 }
             }
         });
-    </script>
 
+        document.getElementById('sale-btn').addEventListener('click', function() {
+            updateRanking('sale');
+        });
+
+        document.getElementById('jeonse-btn').addEventListener('click', function() {
+            updateRanking('jeonse');
+        });
+
+        document.getElementById('rent-btn').addEventListener('click', function() {
+            updateRanking('rent');
+        });
+
+        function updateRanking(type) {
+            let villaData, officeData, oneData;
+
+            if (type === 'sale') {
+                villaData = {{ villas_sale|safe }};
+                officeData = {{ offices_sale|safe }};
+                oneData = {{ ones_sale|safe }};
+            } else if (type === 'jeonse') {
+                villaData = {{ villas_jeonse|safe }};
+                officeData = {{ offices_jeonse|safe }};
+                oneData = {{ ones_jeonse|safe }};
+            } else {
+                villaData = {{ villas_rent|safe }};
+                officeData = {{ offices_rent|safe }};
+                oneData = {{ ones_rent|safe }};
+            }
+
+            updateList('villas', villaData);
+            updateList('offices', officeData);
+            updateList('ones', oneData);
+        }
+
+        function updateList(listType, data) {
+            const listElement = document.querySelector(`.ranking-list.${listType}`);
+            listElement.innerHTML = ''; // Clear previous entries
+
+            data.forEach(function(item) {
+                const li = document.createElement('li');
+                li.innerHTML = item; // Assuming item is a string
+                listElement.appendChild(li);
+            });
+        }
+    </script>
 </body>
 </html>
