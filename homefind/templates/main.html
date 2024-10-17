@@ -159,7 +159,8 @@
         <!-- Page 3: Wordcloud -->
         <div id="page3" class="page-container">
             <div class="title">Top Keywords</div>
-            <img src="path/to/wordcloud.png" alt="Wordcloud Image" class="wordcloud-image">
+            {% load static %}
+            <img src="{% static 'wordcloud_images/wordcloud.png' %}" alt="Wordcloud Image" class="wordcloud-image">
         </div>
 
         <!-- Navigation Arrows -->

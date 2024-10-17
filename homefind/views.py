@@ -115,7 +115,7 @@ def map(request):
 
 
 def home(request):
-    # 1페이지 막대 그래프 위한 regions, num_res 배열 만들어 반환
+    # 1. 첫번째 페이지 막대 그래프 위한 regions, num_res 배열 만들어 반환
     regions = ['강남구', '서초구', '송파구', '강동구', '마포구', '중구', '종로구', '동대문구', '강북구', '성북구', '노원구', '도봉구', '은평구', '서대문구', '양천구', '영등포구', '관악구', '동작구', '광진구', '구로구']
     num_res = [0] * len(regions)
 
@@ -131,48 +131,41 @@ def home(request):
     }
 
     # 2페이지 - 빌라, 오피스텔, 원룸 별 저렴한 건물 보여주기 위한 데이터 반환
-    villas = res.filter(type='빌라').order_by('-price')[:3]
-    offices = res.filter(type='오피스텔').order_by('-price')[:3]
-    ones = res.filter(type='원룸').order_by('-price')[:3]
+    villas = res.filter(type='빌라').order_by('price')[:3]
+    offices = res.filter(type='오피스텔').order_by('price')[:3]
+    ones = res.filter(type='원룸').order_by('price')[:3]
 
+    # 빌라 최저가 정보
     context['villas'] = []
-
     for i in range(len(villas)):
         villa = villas[i]
         result = str(i + 1) + '. ' + str(villa.region.region_name) + '/' 
-
         if villa.category == '월세':
-            result += '월세: ' + str(int(villa.rent_price) // 10000) + '만'
+            result += '월세: ' + str(int(villa.rent_price)) + '만'
         else:
-            result += str(villa.category) + ': ' + str(int(villa.price) // 10000) + '만'
-        
+            result += str(villa.category) + ': ' + str(int(villa.price)) + '만'
         context['villas'].append(result)
     
+    # 오피스텔 최저가 정보
     context['offices'] = []
-
     for i in range(len(offices)):
         office = offices[i]
         result = str(i + 1) + '. ' + str(office.region.region_name) + '/' 
-
         if office.category == '월세':
-            result += '월세: ' + str(int(office.rent_price) // 10000) + '만'
+            result += '월세: ' + str(int(office.rent_price)) + '만'
         else:
-            result += str(office.category) + ': ' + str(int(office.price) // 10000) + '만'
-        
+            result += str(office.category) + ': ' + str(int(office.price)) + '만'
         context['offices'].append(result)
     
+    # 원룸 최저가 정보
     context['ones'] = []
-
     for i in range(len(ones)):
         one = ones[i]
         result = str(i + 1) + '. ' + str(one.region.region_name) + '/' 
-
         if one.category == '월세':
-            result += '월세: ' + str(int(one.rent_price) // 10000) + '만'
+            result += '월세: ' + str(int(one.rent_price)) + '만'
         else:
-            result += str(one.category) + ': ' + str(int(one.price) // 10000) + '만'
-        
+            result += str(one.category) + ': ' + str(int(one.price)) + '만'        
         context['ones'].append(result)
-
 
     return render(request, "main.html", context=context)
