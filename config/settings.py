@@ -124,7 +124,7 @@ USE_TZ = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'crawl/wordcloud/static'),  # one_app의 static 디렉터리 경로
+    os.path.join(BASE_DIR, 'crawl/wordcloud/static'),
 ]
 
 
