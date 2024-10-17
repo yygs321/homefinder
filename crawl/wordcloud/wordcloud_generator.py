@@ -31,5 +31,6 @@ def generate_wordcloud(frequency_data):
     plt.savefig(image_path, format='png')
     plt.close()
 
-frequency_data=check_cache_and_collect_data()
-generate_wordcloud(frequency_data)
+# 테스트용 코드 주석처리
+# frequency_data=check_cache_and_collect_data()
+# generate_wordcloud(frequency_data)
