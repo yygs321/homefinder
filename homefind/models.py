@@ -60,7 +60,7 @@ class NewsFrequency(models.Model):
     value = models.CharField(max_length=20)
     count = models.IntegerField()
     date = models.DateField()
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name='Created Date')  # 생성일
+    created_date = models.DateTimeField(auto_now_add=True,null=True,blank=True, verbose_name='Created Date')  # 생성일
 
     def __str__(self):
         return f"{self.category} - {self.value} on {self.date}"

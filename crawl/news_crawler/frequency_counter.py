@@ -25,4 +25,4 @@ def update_or_add_frequency(frequency_data, category, value,pub_date):
             return
 
     # 없으면 새로 추가
-    frequency_data.append([category, value, 1, pub_date.strftime('%Y-%m-%d')])
+    frequency_data.append([category, value, 1, pub_date.strftime('%Y-%m-%d'),pub_date.strftime('%Y-%m-%d')])
