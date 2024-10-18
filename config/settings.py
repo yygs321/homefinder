@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'homefind',
     'community',
+    'crawl',
 ]
 
 MIDDLEWARE = [

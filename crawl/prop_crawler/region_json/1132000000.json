@@ -1,0 +1,48 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1132010800",
+                "CortarNm": "도봉동",
+                "MapXCrdn": "127.0301",
+                "MapYCrdn": "37.6853",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1132010600",
+                "CortarNm": "방학동",
+                "MapXCrdn": "127.0337",
+                "MapYCrdn": "37.664774",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1132010500",
+                "CortarNm": "쌍문동",
+                "MapXCrdn": "127.0249",
+                "MapYCrdn": "37.6526",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1132010700",
+                "CortarNm": "창동",
+                "MapXCrdn": "127.044913",
+                "MapYCrdn": "37.64639",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1132000000",
+            "CortarNm": "도봉구",
+            "MapXCrdn": "127.047163",
+            "MapYCrdn": "37.668768",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

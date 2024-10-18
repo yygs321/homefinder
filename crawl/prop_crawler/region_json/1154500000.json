@@ -1,0 +1,41 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1154510100",
+                "CortarNm": "가산동",
+                "MapXCrdn": "126.891732",
+                "MapYCrdn": "37.476904",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1154510200",
+                "CortarNm": "독산동",
+                "MapXCrdn": "126.9002",
+                "MapYCrdn": "37.466185",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1154510300",
+                "CortarNm": "시흥동",
+                "MapXCrdn": "126.9115",
+                "MapYCrdn": "37.4496",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1154500000",
+            "CortarNm": "금천구",
+            "MapXCrdn": "126.902075",
+            "MapYCrdn": "37.45196",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

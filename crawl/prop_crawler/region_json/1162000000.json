@@ -1,0 +1,41 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1162010300",
+                "CortarNm": "남현동",
+                "MapXCrdn": "126.977837",
+                "MapYCrdn": "37.474539",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1162010100",
+                "CortarNm": "봉천동",
+                "MapXCrdn": "126.9567",
+                "MapYCrdn": "37.4753",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1162010200",
+                "CortarNm": "신림동",
+                "MapXCrdn": "126.9346",
+                "MapYCrdn": "37.4632",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1162000000",
+            "CortarNm": "관악구",
+            "MapXCrdn": "126.951601",
+            "MapYCrdn": "37.481021",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

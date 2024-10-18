@@ -1,0 +1,62 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1126010500",
+                "CortarNm": "망우동",
+                "MapXCrdn": "127.1073",
+                "MapYCrdn": "37.600899",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1126010100",
+                "CortarNm": "면목동",
+                "MapXCrdn": "127.0903",
+                "MapYCrdn": "37.5818",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1126010400",
+                "CortarNm": "묵동",
+                "MapXCrdn": "127.078325",
+                "MapYCrdn": "37.612607",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1126010200",
+                "CortarNm": "상봉동",
+                "MapXCrdn": "127.090875",
+                "MapYCrdn": "37.600282",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1126010600",
+                "CortarNm": "신내동",
+                "MapXCrdn": "127.0934",
+                "MapYCrdn": "37.6103",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1126010300",
+                "CortarNm": "중화동",
+                "MapXCrdn": "127.0792",
+                "MapYCrdn": "37.6004",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1126000000",
+            "CortarNm": "중랑구",
+            "MapXCrdn": "127.092584",
+            "MapYCrdn": "37.606324",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

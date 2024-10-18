@@ -1,0 +1,90 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1123010500",
+                "CortarNm": "답십리동",
+                "MapXCrdn": "127.0564",
+                "MapYCrdn": "37.57",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010100",
+                "CortarNm": "신설동",
+                "MapXCrdn": "127.024625",
+                "MapYCrdn": "37.573942",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010200",
+                "CortarNm": "용두동",
+                "MapXCrdn": "127.0362",
+                "MapYCrdn": "37.5758",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123011000",
+                "CortarNm": "이문동",
+                "MapXCrdn": "127.0624",
+                "MapYCrdn": "37.5996",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010600",
+                "CortarNm": "장안동",
+                "MapXCrdn": "127.0714",
+                "MapYCrdn": "37.5711",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010400",
+                "CortarNm": "전농동",
+                "MapXCrdn": "127.0567",
+                "MapYCrdn": "37.5803",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010300",
+                "CortarNm": "제기동",
+                "MapXCrdn": "127.0371",
+                "MapYCrdn": "37.5847",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010700",
+                "CortarNm": "청량리동",
+                "MapXCrdn": "127.0464",
+                "MapYCrdn": "37.5882",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010800",
+                "CortarNm": "회기동",
+                "MapXCrdn": "127.055313",
+                "MapYCrdn": "37.590808",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1123010900",
+                "CortarNm": "휘경동",
+                "MapXCrdn": "127.0627",
+                "MapYCrdn": "37.588574",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1123000000",
+            "CortarNm": "동대문구",
+            "MapXCrdn": "127.039765",
+            "MapYCrdn": "37.574493",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}
