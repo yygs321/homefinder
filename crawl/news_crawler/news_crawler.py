@@ -73,7 +73,7 @@ def crawl_news(city_no, dvsn_no,frequency_data):
 
             pub_date = datetime.strptime(date_str, '%Y%m%d')
 
-            # 날짜가 3개월 이전이면 크롤링 중단
+            # 날짜가 6개월 이전이면 크롤링 중단
             if pub_date < six_months_ago:
                 flag=1
                 break
