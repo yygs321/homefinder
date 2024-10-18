@@ -16,7 +16,7 @@ def generate_wordcloud(frequency_data):
     font_path = 'C:/Windows/Fonts/malgun.ttf'
 
     # 워드클라우드 생성
-    wordcloud = WordCloud(width=800, height=400, background_color='black', font_path=font_path).generate_from_frequencies(word_frequency)
+    wordcloud = WordCloud(width=750, height=450, background_color='black', font_path=font_path).generate_from_frequencies(word_frequency)
 
     # 이미지 저장
     image_dir = 'static/wordcloud_images'
@@ -31,5 +31,5 @@ def generate_wordcloud(frequency_data):
     plt.savefig(image_path, format='png')
     plt.close()
 
-frequency_data=check_cache_and_collect_data()
-generate_wordcloud(frequency_data)
+# frequency_data=check_cache_and_collect_data()
+# generate_wordcloud(frequency_data)
