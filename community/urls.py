@@ -14,22 +14,6 @@ urlpatterns = [
     path('seocho/', views.seocho_view, name='seocho'),
     path('songpa/', views.songpa_view, name='songpa'),
     path('post_<int:board_id>/', PostDetailView.as_view(), name='post-detail'),
-    path('create/', PostCreateView.as_view(), name='post_create'),
+    path('create/', PostCreateView.as_view(), name='post-create'),
     path('logout/', views.logout_view, name='logout'),
 ]
-
-
-# from django.urls import path, include
-# from .views import *
-
-# urlpatterns = [
-#     path('mapdata/', MapData.as_view()),
-#     path('scountbygu/', ForSaleCountByGu.as_view()),
-#     path('scountbytype/', ForSaleCountbyType.as_view()),
-#     path('scountbycat/', ForSaleCountbyCategory.as_view()),
-#     path('wclouddata/', WordCloudData.as_view()),
-#     path('heatdata/', HeatMapData.as_view()),
-# ]
-from django.urls import path
-from . import views
-

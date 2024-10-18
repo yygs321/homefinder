@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Finder</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-top: 20px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .arrow {
+            font-size: 2em;
+            cursor: pointer;
+        }
+        .page-container {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .navigation {
+            text-align: center;
+            margin: 20px;
+        }
+        .footer-buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .footer-buttons button {
+            margin: 0 10px;
+        }
+        .ranking-list {
+            margin: 20px auto;
+            width: 80%;
+            list-style: none;
+            padding: 0;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .ranking-list li {
+            padding: 15px;
+            font-size: 1.4em;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ranking-list li span {
+            color: #2980b9;
+        }
+        .ranking-list li:last-child {
+            border-bottom: none;
+        }
+        .page2-heading {
+            margin-top: 20px;
+            font-size: 1.8em;
+            color: #e74c3c;
+        }
+        .ranking-section {
+            margin-bottom: 30px;
+        }
+        .wordcloud-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Home Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Board</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Map</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="container">
+
+        <!-- Page 1: 매물수 비교 막대 차트 -->
+        <div id="page1" class="page-container active">
+            <div class="title">서울 구별 전체 매물수 비교</div>
+            <canvas id="myBarChart"></canvas>
+        </div>
+
+        <!-- Page 2: 빌라, 오피스텔, 원룸 매매/전세/월세 상위 3개 순위 -->
+        <div id="page2" class="page-container">
+            <div class="title">저렴한 부동산 Top3</div>
+            <div class="btn-group toggle-buttons" role="group" aria-label="Toggle for transaction type">
+                <button type="button" class="btn btn-outline-primary" id="sale-btn">매매</button>
+                <button type="button" class="btn btn-outline-secondary" id="jeonse-btn">전세</button>
+                <button type="button" class="btn btn-outline-success" id="rent-btn">월세</button>
+            </div>
+            <div class="ranking-section">
+                <div class="page2-heading">빌라</div>
+                <ul class="ranking-list villas">
+                    {% load custom_filters %}
+                    {% for villa in villas %}
+                        {% with villa|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="ranking-section">
+                <div class="page2-heading">오피스텔</div>
+                <ul class="ranking-list offices">
+                    {% load custom_filters %}
+                    {% for office in offices %}
+                        {% with office|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="ranking-section">
+                <div class="page2-heading">원룸</div>
+                <ul class="ranking-list ones">
+                    {% load custom_filters %}
+                    {% for one in ones %}
+                        {% with one|split:"/" as parts %}
+                            <li>{{ parts.0 }}
+                                <span>
+                                    {{ parts.1 }}
+                                </span>
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Page 3: Wordcloud -->
+        <div id="page3" class="page-container">
+            <div class="title">Top Keywords</div>
+            {% load static %}
+            <img src="{% static 'wordcloud_images/wordcloud.png' %}" alt="Wordcloud Image" class="wordcloud-image">
+        </div>
+
+        <!-- Navigation Arrows -->
+        <div class="navigation">
+            <span class="arrow" id="prev">&#8592; 이전</span>
+            <span class="arrow" id="next">다음 &#8594;</span>
+        </div>
+
+        <!-- Footer Buttons -->
+        <div class="footer-buttons">
+            <button class="btn btn-primary" onclick="location.href='index'">상세 조회</button>
+            <button class="btn btn-secondary" onclick="location.href='map'">평균 가격</button>
+        </div>
+
+    </div>
+
+    <script>
+        // 페이지 전환 스크립트
+        let currentPage = 1;
+        const totalPages = 3;
+
+        document.getElementById('next').addEventListener('click', function() {
+            currentPage = (currentPage % totalPages) + 1;
+            updatePage();
+        });
+
+        document.getElementById('prev').addEventListener('click', function() {
+            currentPage = (currentPage - 1) || totalPages;
+            updatePage();
+        });
+
+        function updatePage() {
+            for (let i = 1; i <= totalPages; i++) {
+                document.getElementById('page' + i).classList.remove('active');
+            }
+            document.getElementById('page' + currentPage).classList.add('active');
+        }
+
+        // 막대 차트 생성
+        const ctx = document.getElementById('myBarChart').getContext('2d');
+        const labels = {{ regions |safe }};
+        const data = {{ num_res }};
+
+        const myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '매물 수',
+                    data: data,
+                    backgroundColor: '#36A2EB'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        document.getElementById('sale-btn').addEventListener('click', function() {
+            updateRanking('sale');
+        });
+
+        document.getElementById('jeonse-btn').addEventListener('click', function() {
+            updateRanking('jeonse');
+        });
+
+        document.getElementById('rent-btn').addEventListener('click', function() {
+            updateRanking('rent');
+        });
+
+        function updateRanking(type) {
+            let villaData, officeData, oneData;
+
+            if (type === 'sale') {
+                villaData = {{ villas_sale|safe }};
+                officeData = {{ offices_sale|safe }};
+                oneData = {{ ones_sale|safe }};
+            } else if (type === 'jeonse') {
+                villaData = {{ villas_jeonse|safe }};
+                officeData = {{ offices_jeonse|safe }};
+                oneData = {{ ones_jeonse|safe }};
+            } else {
+                villaData = {{ villas_rent|safe }};
+                officeData = {{ offices_rent|safe }};
+                oneData = {{ ones_rent|safe }};
+            }
+
+            updateList('villas', villaData);
+            updateList('offices', officeData);
+            updateList('ones', oneData);
+        }
+
+        function updateList(listType, data) {
+            const listElement = document.querySelector(`.ranking-list.${listType}`);
+            listElement.innerHTML = ''; // Clear previous entries
+
+            data.forEach(function(item) {
+                const li = document.createElement('li');
+                li.innerHTML = item; // Assuming item is a string
+                listElement.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
