@@ -178,9 +178,9 @@ def home(request):
         context['image_url'] = "데이터가 없습니다."
     else:
         # 워드클라우드 이미지 생성
-        generate_wordcloud(frequency_data)
-        image_url = '/static/wordcloud_images/wordcloud.png'
+        image_url =generate_wordcloud(frequency_data)
         context['image_url'] = image_url
+
     return render(request, "main.html", context=context)
 
 

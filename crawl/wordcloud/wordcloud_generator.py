@@ -1,9 +1,9 @@
 import os
-
+from config import settings
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-
-from crawl.news_crawler.news_crawler import check_cache_and_collect_data
+import matplotlib
+matplotlib.use('Agg')  # Agg 백엔드 사용
 
 
 def generate_wordcloud(frequency_data):
@@ -19,7 +19,7 @@ def generate_wordcloud(frequency_data):
     wordcloud = WordCloud(width=800, height=400, background_color='black', font_path=font_path).generate_from_frequencies(word_frequency)
 
     # 이미지 저장
-    image_dir = 'static/wordcloud_images'
+    image_dir = os.path.join(settings.BASE_DIR, 'static', 'wordcloud_images')
     image_path = os.path.join(image_dir, 'wordcloud.png')
 
     # 디렉토리가 존재하지 않으면 생성
@@ -30,6 +30,9 @@ def generate_wordcloud(frequency_data):
     plt.axis('off')
     plt.savefig(image_path, format='png')
     plt.close()
+
+    image_url = '/static/wordcloud_images/wordcloud.png'
+    return image_url
 
 # #테스트용 코드 주석처리
 # frequency_data=check_cache_and_collect_data()
