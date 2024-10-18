@@ -1,0 +1,48 @@
+{
+    "result": {
+        "list": [
+            {
+                "CortarNo": "1130510100",
+                "CortarNm": "미아동",
+                "MapXCrdn": "127.0208",
+                "MapYCrdn": "37.6222",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1130510200",
+                "CortarNm": "번동",
+                "MapXCrdn": "127.037013",
+                "MapYCrdn": "37.629215",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1130510300",
+                "CortarNm": "수유동",
+                "MapXCrdn": "127.0046",
+                "MapYCrdn": "37.6371",
+                "CortarType": "sec"
+            },
+            {
+                "CortarNo": "1130510400",
+                "CortarNm": "우이동",
+                "MapXCrdn": "127.002",
+                "MapYCrdn": "37.6633",
+                "CortarType": "sec"
+            }
+        ],
+        "dvsnInfo": {
+            "CortarNo": "1130500000",
+            "CortarNm": "강북구",
+            "MapXCrdn": "127.025488",
+            "MapYCrdn": "37.63974",
+            "CortarType": "dvsn"
+        },
+        "cityInfo": {
+            "CortarNo": "1100000000",
+            "CortarNm": "서울시",
+            "MapXCrdn": "126.977872",
+            "MapYCrdn": "37.566427",
+            "CortarType": "city"
+        }
+    }
+}

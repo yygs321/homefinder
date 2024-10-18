@@ -292,6 +292,7 @@ pyrightconfig.json
 **/.DS_Store
 
 *.csv
+*.sql
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm"__pycache__/" 
 
