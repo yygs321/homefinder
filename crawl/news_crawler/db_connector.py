@@ -27,13 +27,13 @@ def save_to_db(frequency_data):
     cursor = connection.cursor()
 
     # 기존 데이터 삭제
-    delete_query = "DELETE FROM NewsFrequency;"
+    delete_query = "DELETE FROM homefind_newsfrequency;"
     cursor.execute(delete_query)
 
     # 새 데이터 삽입
     insert_query = """
-    INSERT INTO NewsFrequency (category, value, count, date)
-    VALUES (%s, %s, %s, %s);
+    INSERT INTO homefind_newsfrequency (category, value, count, date,created_date)
+    VALUES (%s, %s, %s, %s, %s);
     """
 
     try:
@@ -49,7 +49,7 @@ def save_to_db(frequency_data):
 # redis에 데이터 저장
 def save_to_redis(frequency_data):
     for record in frequency_data:
-        category, value, count, date = record
+        category, value, count, date, created_date = record
 
         redis_key = f"{category}:{value}"
         # hmset으로 값을 저장할 때 모든 값은 문자열로 저장됨
