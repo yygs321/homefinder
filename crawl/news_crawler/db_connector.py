@@ -1,4 +1,4 @@
-import mysql.connector
+import MySQLdb
 import redis
 from crawl.news_crawler.db_config import MYSQL_DB_CONFIG, REDIS_CONFIG
 from datetime import datetime, timedelta
@@ -10,14 +10,14 @@ redis_client = redis.StrictRedis(host=REDIS_CONFIG['host'], port=REDIS_CONFIG['p
 def create_connection():
     connection = None
     try:
-        connection = mysql.connector.connect(
+        connection = MySQLdb.connect(
             host=MYSQL_DB_CONFIG['host'],
             user=MYSQL_DB_CONFIG['user'],
             password=MYSQL_DB_CONFIG['password'],
             database=MYSQL_DB_CONFIG['database']
         )
         print("MySQL 데이터베이스 연결 성공!")
-    except mysql.connector.Error as e:
+    except MySQLdb.Error as e:
         print(f"Error: '{e}'")
 
     return connection
